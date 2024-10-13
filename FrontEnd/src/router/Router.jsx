@@ -1,5 +1,9 @@
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Allproject from "../pages/Allproject";
+import ErrorPage from "./Error";
+import Myproject from "../pages/Myproject";
+import AddIdea from "../pages/AddIdea";
 // import Home from './pages/Home';
 // import StudentRegister from './components/StudentRegister';
 // import StudentLogin from './components/StudentLogin';
@@ -8,10 +12,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
  
     
-    // {
-    //     path: "/Welcome",
-    //     element: <Welcome/>
-    // },
+    {
+        path: "/Allproject",
+        element: <AddIdea/>,
+        errorElement:<ErrorPage/>,
+    },
     // {
     //     path: "/register",
     //     element: <StudentRegister />
