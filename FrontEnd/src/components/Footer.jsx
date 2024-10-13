@@ -3,7 +3,7 @@ import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white py-8 w-full mt-auto">
+    <footer className="bg-[#2B39A1] text-white py-8 w-full mt-auto">
       <div className="container mx-auto text-center">
         <div className="mb-4">
           <h2 className="text-2xl font-bold">Graduation Project Management</h2>
@@ -26,18 +26,18 @@ const Footer = () => {
         
         {/* أيقونات التواصل الاجتماعي */}
         <div className="flex justify-center space-x-6">
-          <a href="https://facebook.com" className="text-white hover:text-gray-300">
+          <p className="text-white hover:text-gray-300">
             <FaFacebook size={24} />
-          </a>
-          <a href="https://twitter.com" className="text-white hover:text-gray-300">
+          </p>
+          <p className="text-white hover:text-gray-300">
             <FaTwitter size={24} />
-          </a>
-          <a href="https://linkedin.com" className="text-white hover:text-gray-300">
+          </p>
+          <p className="text-white hover:text-gray-300">
             <FaLinkedin size={24} />
-          </a>
-          <a href="https://instagram.com" className="text-white hover:text-gray-300">
+          </p>
+          <p className="text-white hover:text-gray-300">
             <FaInstagram size={24} />
-          </a>
+          </p>
         </div>
         
         {/* حقوق النشر */}

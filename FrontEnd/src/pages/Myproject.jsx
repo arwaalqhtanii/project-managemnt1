@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaPlus } from 'react-icons/fa'; 
 import { useNavigate } from 'react-router-dom'; 
+import Footer from '../components/Footer';
 
 function Myproject() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -76,7 +77,7 @@ function Myproject() {
   const navigate = useNavigate(); // Initialize useNavigate for navigation
 
   const handleAllIdeasClick = () => {
-    navigate('/Addidea'); // Navigate to the all ideas page
+    navigate('/addidea'); // Navigate to the all ideas page
   };
 
   return (
@@ -84,7 +85,7 @@ function Myproject() {
       <nav className="w-full bg-blue-600 p-4 text-white text-center">
         <h1 className="text-xl font-bold">My Projects</h1>
       </nav>
-      <div className="flex-grow flex flex-col items-center justify-center p-4 max-sm:p-1">
+      <div className="flex-grow flex min-h-screen flex-col items-center justify-center p-4 max-sm:p-1">
         <div className="w-full max-w-7xl bg-white shadow-lg rounded-lg p-6 max-sm:p-3 flex flex-col overflow-hidden">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-3xl max-sm:text-xl font-bold text-black border-b-4 border-blue-400 pb-2">
@@ -168,9 +169,10 @@ function Myproject() {
           </div>
         </div>
       </div>
-      <footer className="w-full bg-blue-600 p-4 text-white text-center mt-4">
+      <Footer/>
+      {/* <footer className="w-full bg-blue-600 p-4 text-white text-center mt-4">
         <p>&copy; 2024 My Project Management</p>
-      </footer>
+      </footer> */}
     </div>
   );
 }

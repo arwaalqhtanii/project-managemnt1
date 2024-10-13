@@ -13,20 +13,16 @@ const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-
     if (userType === 'student' && !email.endsWith('@tuwaiq.com')) {
       alert('Students must use an email with the domain "@tuwaiq.com".');
       return;
     }
-
-
 
     if (password.length < 5) {
       alert('Password must be at least 5 characters long.');
       return;
     }
 
-   
     const userData = {
       name,
       email,
@@ -43,7 +39,6 @@ const Register = () => {
     })
       .then(response => {
         if (response.ok) {
-        
           if (userType === 'admin') {
             alert('Admin account created successfully!');
             navigate('/هنا صفحه يوسف'); 
@@ -77,70 +72,50 @@ const Register = () => {
       <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-md relative z-10">
         <h2 className="text-2xl font-bold mb-6 text-center">Get Started</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            placeholder="Full Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="border p-2 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="border p-2 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password (at least 5 characters)"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="border p-2 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-
-         
-          <div className="flex space-x-4 justify-left">
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                value="student"
-                checked={userType === 'student'}
-                onChange={() => setUserType('student')}
-                className="mr-2"
-              />
-              Student
-            </label>
-            <label className="flex items-center">
-              <input
-                type="checkbox"
-                value="admin"
-                checked={userType === 'admin'}
-                onChange={() => setUserType('admin')}
-                className="mr-2"
-              />
-              Admin
-            </label>
+          <div>
+            <label className="block mb-1 font-medium" htmlFor="name">User Name</label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              placeholder="Username"
+              onChange={(e) => setName(e.target.value)}
+              className="border p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+              required
+            />
+            <small className='text-gray-500 ml-2'>Username should have one capital letter.</small>
+          </div>
+          <div>
+            <label className="block mb-1 font-medium" htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              placeholder="Example@example.com"
+              onChange={(e) => setEmail(e.target.value)}
+              className="border p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+              required
+            />
+            <small className='text-gray-500 ml-2'>If you're a student, your email should have @tuwaiq.</small>
+          </div>
+          <div>
+            <label className="block mb-1 font-medium" htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              placeholder='Password'
+              onChange={(e) => setPassword(e.target.value)}
+              className="border p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
+              required
+            />
+            <small className='text-gray-500 ml-2'>Password should have at least 5 characters.</small>
           </div>
 
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full font-semibold hover:bg-blue-600 transition duration-300">
-            Sign up
+          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-lg w-full font-semibold hover:bg-blue-600 transition duration-300 mt-6">
+            Sign Up
           </button>
         </form>
-
-  
-        <div className="text-center mt-6">
-          <p>Or sign up with:</p>
-          <div className="flex justify-center space-x-4 mt-4">
-            <FaFacebook className="text-blue-600 cursor-pointer" size={24} />
-            <FaTwitter className="text-blue-400 cursor-pointer" size={24} />
-            <FaGoogle className="text-red-500 cursor-pointer" size={24} />
-            <FaApple className="text-black cursor-pointer" size={24} />
-          </div>
-        </div>
 
         <div className="text-center mt-4">
           <p>Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Sign in</Link></p>

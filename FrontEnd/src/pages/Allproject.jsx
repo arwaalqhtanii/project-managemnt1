@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import Footer from '../components/Footer';
 
 function Allproject() {
   const data = [
@@ -22,7 +23,7 @@ function Allproject() {
       <nav className="w-full bg-blue-600 p-4 text-white text-center">
         <h1 className="text-xl font-bold">Project Management</h1>
       </nav>
-      <div className="flex-grow flex flex-col items-center justify-center p-4 max-sm:p-1">
+      <div className="flex-grow min-h-screen flex flex-col items-center justify-center p-4 max-sm:p-1">
       <div className="w-full max-w-7xl bg-white shadow-lg rounded-lg p-6 max-sm:p-1 flex flex-col items-center">
       <div className="w-full border-b-4 border-blue-400 mb-4">
     <h2 className="text-3xl font-bold text-black pb-2 text-left">
@@ -73,9 +74,10 @@ function Allproject() {
 </div>
 
       </div>
-      <footer className="w-full bg-blue-600 p-4 text-white text-center mt-4">
+      <Footer/>
+      {/* <footer className="w-full bg-blue-600 p-4 text-white text-center mt-4">
         <p>&copy; 2024 Project Management System</p>
-      </footer>
+      </footer> */}
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import idea from '../assets/idea.jpg';
+import Footer from '../components/Footer';
 
 function AddIdea() {
   const [projectName, setProjectName] = useState('');
@@ -23,7 +24,7 @@ function AddIdea() {
       </nav>
 
       {/* Main Content */}
-      <div className="flex-grow flex flex-col md:flex-row items-center justify-center p-4">
+      <div className="flex-grow flex flex-col min-h-screen md:flex-row items-center justify-center p-4">
         <div className="bg-slate-100 w-full max-w-lg shadow-lg rounded-lg p-6 mb-4 md:mb-0 md:mr-4">
           <h2 className="text-2xl font-semibold text-gray-800 mb-4 text-center">Add Your Project</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -65,7 +66,7 @@ function AddIdea() {
         </div>
         
         {/* Image on the right */}
-        <div className="hidden md:block w-full max-w-md">
+        <div className="hidden md:block w-full max-w-md  lg:ml-20">
           <img 
             src={idea} 
             alt="Project Idea" 
@@ -75,9 +76,10 @@ function AddIdea() {
       </div>
 
       {/* Footer */}
-      <footer className="w-full bg-blue-600 p-4 text-white text-center mt-4">
+      <Footer/>
+      {/* <footer className="w-full bg-blue-600 p-4 text-white text-center mt-4">
         <p>&copy; 2024 My Project Management</p>
-      </footer>
+      </footer> */}
 
       {/* Toast Container */}
       <ToastContainer />
