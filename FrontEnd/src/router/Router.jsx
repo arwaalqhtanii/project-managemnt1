@@ -7,6 +7,8 @@ import StudentRegister from '../pages/StudentRegister';
 import StudentLogin from "../pages/StudentLogin";
 import WelcomePage from "../pages/Welcome";
 import Admin from "../pages/Admin";
+import HomeAd from "../pages/HomeAd";
+import StudentHomePage from "../pages/StudentHomePage";
 const router = createBrowserRouter([
 
     {
@@ -39,6 +41,15 @@ const router = createBrowserRouter([
     {
         path: "/admin",
         element: <Admin></Admin>
+    },
+     {
+        path: "/adminhome",
+        element: <HomeAd></HomeAd>
+    }
+    ,
+     {
+        path: "/studentHome",
+        element: <StudentHomePage></StudentHomePage>
     }
 ]);
 
