@@ -2,3 +2,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* تخصيص عرض الـ Scrollbar */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* تخصيص شكل المسار (المساحة الخلفية للـ Scrollbar) */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* تخصيص شكل المقبض (الجزء المتحرك من الـ Scrollbar) */
+::-webkit-scrollbar-thumb {
+    background-color: #1b5fb9; /* لون المقبض */
+    border-radius: 10px; /* زاوية مستديرة للمقبض */
+    border: 2px solid #1b5fb9; /* حدود للمقبض */
+}
+
+/* تخصيص شكل المقبض عند التحويم فوقه */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* تغيير لون المقبض عند التحويم */
+}

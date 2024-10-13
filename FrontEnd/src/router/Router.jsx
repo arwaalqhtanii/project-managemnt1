@@ -3,14 +3,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import Home from './pages/Home';
 // import StudentRegister from './components/StudentRegister';
 // import StudentLogin from './components/StudentLogin';
-// import Welcome from "./pages/Welcome";
-
+//import Welcome from "./pages/Welcome";
+import Admin from "../pages/Admin";
 const router = createBrowserRouter([
  
     
-    // {
-    //     path: "/Welcome",
-    //     element: <Welcome/>
+    //{
+     //    path: "/Welcome",
+     //    element: <Welcome/>
     // },
     // {
     //     path: "/register",
@@ -20,11 +20,15 @@ const router = createBrowserRouter([
     //     path: "/login",
     //     element: <StudentLogin />
     // },
-  
+
     // {
     //     path: "*",
     //     element: <h1>404 Not Found</h1> 
     // }
+    {
+        path: "/admin",
+        element: <Admin></Admin>
+    }
 ]);
 
 const Router = () => {
