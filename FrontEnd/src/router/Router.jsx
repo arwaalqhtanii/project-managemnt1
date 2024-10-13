@@ -1,4 +1,3 @@
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Allproject from "../pages/Allproject";
 import ErrorPage from "./Error";
@@ -7,13 +6,13 @@ import AddIdea from "../pages/AddIdea";
 import StudentRegister from '../pages/StudentRegister';
 import StudentLogin from "../pages/StudentLogin";
 import WelcomePage from "../pages/Welcome";
-
+import Admin from "../pages/Admin";
 const router = createBrowserRouter([
- 
+
     {
         path: "/",
-        element: <WelcomePage/>,
-        errorElement:<ErrorPage/>
+        element: <WelcomePage />,
+        errorElement: <ErrorPage />
 
     },
     {
@@ -36,11 +35,11 @@ const router = createBrowserRouter([
         path: "/addidea",
         element: <AddIdea />
     },
-  
-    // {
-    //     path: "*",
-    //     element: <h1>404 Not Found</h1> 
-    // }
+
+    {
+        path: "/admin",
+        element: <Admin></Admin>
+    }
 ]);
 
 const Router = () => {
