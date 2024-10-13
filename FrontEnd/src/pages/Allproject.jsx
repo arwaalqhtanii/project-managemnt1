@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 function Allproject() {
   const data = [
@@ -20,12 +21,11 @@ function Allproject() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <nav className="w-full bg-blue-600 p-4 text-white text-center">
-        <h1 className="text-xl font-bold">Project Management</h1>
-      </nav>
+      <Navbar/>
+   
       <div className="flex-grow min-h-screen flex flex-col items-center justify-center p-4 max-sm:p-1">
       <div className="w-full max-w-7xl bg-white shadow-lg rounded-lg p-6 max-sm:p-1 flex flex-col items-center">
-      <div className="w-full border-b-4 border-blue-400 mb-4">
+      <div className="w-full border-b-4 border-[#2B39A0] mb-4">
     <h2 className="text-3xl font-bold text-black pb-2 text-left">
       All Projects Accepted
     </h2>
@@ -34,7 +34,7 @@ function Allproject() {
   <div className="overflow-hidden w-full rounded-lg shadow-lg">
     <table className="min-w-full bg-white rounded-lg">
       <thead>
-        <tr className="bg-gradient-to-r from-blue-400 to-blue-600 text-white">
+        <tr className="bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white">
           <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Student Name</th>
           <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Project Title</th>
           <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Project Description</th>
@@ -55,7 +55,7 @@ function Allproject() {
   <div className="flex items-center justify-center w-full mt-4">
     <button
       onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))}
-      className={`flex items-center p-2 rounded-full ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-700'}`}
+      className={`flex items-center p-2 rounded-full ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#2B39A0] text-white hover:bg-[#444c8a]'}`}
       disabled={currentPage === 0}
     >
       <FaChevronLeft className="w-5 h-5" />
@@ -65,7 +65,7 @@ function Allproject() {
     </span>
     <button
       onClick={() => setCurrentPage(prev => (prev + 1) < totalPages ? prev + 1 : prev)}
-      className={`flex items-center p-2 rounded-full ${currentPage + 1 >= totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-700'}`}
+      className={`flex items-center p-2 rounded-full ${currentPage + 1 >= totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#2B39A0] text-white hover:bg-[#444c8a]'}`}
       disabled={currentPage + 1 >= totalPages}
     >
       <FaChevronRight className="w-5 h-5" />

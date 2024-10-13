@@ -3,6 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import idea from '../assets/idea.jpg';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 function AddIdea() {
   const [projectName, setProjectName] = useState('');
@@ -19,10 +20,8 @@ function AddIdea() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r">
       {/* Navbar */}
-      <nav className="w-full bg-blue-600 p-4 text-white text-center">
-        <h1 className="text-xl font-bold">Project Management</h1>
-      </nav>
-
+      <Navbar/>
+ 
       {/* Main Content */}
       <div className="flex-grow flex flex-col min-h-screen md:flex-row items-center justify-center p-4">
         <div className="bg-slate-100 w-full max-w-lg shadow-lg rounded-lg p-6 mb-4 md:mb-0 md:mr-4">
@@ -54,7 +53,7 @@ function AddIdea() {
 
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 transition duration-300 font-semibold shadow-lg transform hover:scale-105"
+              className="w-full bg-[#2B39A0] text-white p-3 rounded-md hover:bg-[gray] transition duration-300 font-semibold shadow-lg transform hover:scale-105"
             >
               Submit Project
             </button>

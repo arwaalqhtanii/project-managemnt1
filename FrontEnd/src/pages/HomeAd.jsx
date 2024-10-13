@@ -1,5 +1,6 @@
 import React from 'react';
-import Navbar from './Navbar';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 function HomeAd() {
   return (
@@ -14,7 +15,7 @@ function HomeAd() {
           <p className="text-xl mb-8">
             Welcome to the Graduation Project Management System. Here, you can manage and track your project ideas.
           </p>
-          <a href="#stats" className="bg-white text-[#2b39a0] py-3 px-8 rounded-full text-lg font-semibold hover:bg-gray-200 transition duration-300">Explore the Stats</a>
+          <a href="#stats" className="bg-white text-[#2b39a0] py-3 px-8 rounded-full text-lg font-semibold hover:bg-gray-200 transition duration-300">Explore the Status</a>
         </div>
 
         
@@ -78,6 +79,7 @@ function HomeAd() {
           </p>
         </div>
       </section>
+      <Footer/>
       
     </div>
     </>

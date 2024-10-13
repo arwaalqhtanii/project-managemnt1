@@ -1,5 +1,6 @@
 import React from 'react';
-import Navbar from './Navbar';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 function StudentHomePage() {
   return (
@@ -80,6 +81,7 @@ function StudentHomePage() {
         </div>
       </section>
       
+      <Footer/>
     </div>
     </>
   );

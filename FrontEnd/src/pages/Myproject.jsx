@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaChevronLeft, FaChevronRight, FaPlus } from 'react-icons/fa'; 
 import { useNavigate } from 'react-router-dom'; 
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 function Myproject() {
   const [currentPage, setCurrentPage] = useState(0);
@@ -82,18 +83,17 @@ function Myproject() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <nav className="w-full bg-blue-600 p-4 text-white text-center">
-        <h1 className="text-xl font-bold">My Projects</h1>
-      </nav>
+      <Navbar/>
+  
       <div className="flex-grow flex min-h-screen flex-col items-center justify-center p-4 max-sm:p-1">
         <div className="w-full max-w-7xl bg-white shadow-lg rounded-lg p-6 max-sm:p-3 flex flex-col overflow-hidden">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-3xl max-sm:text-xl font-bold text-black border-b-4 border-blue-400 pb-2">
+            <h2 className="text-3xl max-sm:text-xl font-bold text-black border-b-4 border-[#2B39A0] pb-2">
               My Projects Overview
             </h2>
             <button
   onClick={handleAllIdeasClick}
-  className="flex items-center bg-gradient-to-r from-blue-500 to-blue-700 text-white px-4 py-2 rounded-md shadow hover:shadow-md transition duration-300 transform hover:-translate-y-1 focus:outline-none"
+  className="flex items-center bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white px-4 py-2 rounded-md shadow hover:shadow-md transition duration-300 transform hover:-translate-y-1 focus:outline-none"
 >
   <FaPlus className="mr-2 w-4 h-4" />
   <span className="font-medium text-base">Add Ideas</span>
@@ -103,7 +103,7 @@ function Myproject() {
           <div className="overflow-x-auto w-full rounded-lg shadow-lg">
             <table className="min-w-full bg-white rounded-lg">
               <thead>
-                <tr className="bg-gradient-to-r from-blue-400 to-blue-600 text-white">
+                <tr className="bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white">
                   <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold max-sm:p-3">Project Name</th>
                   <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold md:table-cell max-sm:hidden">Project Description</th>
                   <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold md:table-cell max-sm:hidden">Status</th>
@@ -151,7 +151,7 @@ function Myproject() {
           <div className="flex items-center justify-center w-full mt-4">
             <button
               onClick={() => setCurrentPage(prev => Math.max(prev - 1, 0))}
-              className={`flex items-center p-2 rounded-full ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-700'}`}
+              className={`flex items-center p-2 rounded-full ${currentPage === 0 ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#2B39A0] text-white hover:bg-[#444c8a]'}`}
               disabled={currentPage === 0}
             >
               <FaChevronLeft className="w-5 h-5" />
@@ -161,7 +161,7 @@ function Myproject() {
             </span>
             <button
               onClick={() => setCurrentPage(prev => (prev + 1 < totalPages ? prev + 1 : prev))}
-              className={`flex items-center p-2 rounded-full ${currentPage + 1 >= totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 text-white hover:bg-blue-700'}`}
+              className={`flex items-center p-2 rounded-full ${currentPage + 1 >= totalPages ? 'bg-gray-300 cursor-not-allowed' : 'bg-[#2B39A0] text-white hover:bg-[#444c8a]'}`}
               disabled={currentPage + 1 >= totalPages}
             >
               <FaChevronRight className="w-5 h-5" />
@@ -170,9 +170,7 @@ function Myproject() {
         </div>
       </div>
       <Footer/>
-      {/* <footer className="w-full bg-blue-600 p-4 text-white text-center mt-4">
-        <p>&copy; 2024 My Project Management</p>
-      </footer> */}
+    
     </div>
   );
 }

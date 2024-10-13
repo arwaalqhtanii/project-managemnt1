@@ -3,14 +3,14 @@ import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
-    <footer className="bg-[#2B39A1] text-white py-8 w-full mt-auto">
+    <footer className="bg-[#2B39A0] text-white py-8 w-full mt-auto">
       <div className="container mx-auto text-center">
         <div className="mb-4">
-          <h2 className="text-2xl font-bold">Graduation Project Management</h2>
+          <h2 className="text-2xl font-bold max-sm:text-xl">Graduation Project Management</h2>
         </div>
         
   
-        <div className="flex justify-center space-x-6 mb-4">
+        <div className="flex justify-center space-x-6 mb-4 max-sm:text-sm">
           {/* <a href="/" className="hover:text-gray-300">Home</a> */}
          <Link to="/home" className="hover:text-gray-300"> Home </Link>
           <a href="/service" className="hover:text-gray-300">Services</a>
