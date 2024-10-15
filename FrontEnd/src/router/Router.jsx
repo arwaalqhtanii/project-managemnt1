@@ -9,6 +9,7 @@ import WelcomePage from "../pages/Welcome";
 import Admin from "../pages/Admin";
 import HomeAd from "../pages/HomeAd";
 import StudentHomePage from "../pages/StudentHomePage";
+import StudentIdeas from "../pages/StudentIdeas";
 const router = createBrowserRouter([
 
     {
@@ -42,14 +43,18 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <Admin></Admin>
     },
-     {
+    {
         path: "/adminhome",
         element: <HomeAd></HomeAd>
     }
     ,
-     {
+    {
         path: "/studentHome",
         element: <StudentHomePage></StudentHomePage>
+    },
+    {
+        path:"/studentideas/:id",
+        element:<StudentIdeas></StudentIdeas>
     }
 ]);
 
