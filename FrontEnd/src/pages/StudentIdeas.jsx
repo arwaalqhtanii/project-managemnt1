@@ -1,9 +1,6 @@
-import React from 'react'
-import { useState } from 'react';
-import { FaRegUserCircle } from "react-icons/fa";
+
 import { CiSearch } from "react-icons/ci";
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { FaChevronLeft, FaChevronRight, FaPlus } from 'react-icons/fa';
+
 import StudentIdeaItems from '../components/StudentIdeaItems';
 
 import Footer from '../components/Footer';

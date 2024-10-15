@@ -1,44 +1,82 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FaFacebook, FaTwitter, FaGoogle, FaApple } from 'react-icons/fa';
+import axios from 'axios';
 
-const StudentLogin = () => {
+
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const apiURL = 'https://66e7e6bbb17821a9d9da704c.mockapi.io/home';
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    fetch(apiURL)
-      .then((response) => response.json())
-      .then((users) => {
-        const user = users.find((u) => u.email === email && u.password === password);
-
-        if (user) {
-          alert('Login successful!');
-          navigate('/home');
-        } else {
-          alert('Incorrect email or password.');
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert('An error occurred while trying to log in.');
-      });
+  const validateEmail = (email) => {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return regex.test(email);
   };
+
+  const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      // Reset error message
+      setErrorMessage('');
+
+      // Validate inputs
+      if (!email || !password) {
+          setErrorMessage('Both email and password are required.');
+          return;
+      }
+
+      if (!validateEmail(email)) {
+          setErrorMessage('Please enter a valid email address.');
+          return;
+      }
+
+      if (password.length <= 5) {
+          setErrorMessage('Password must be more than 5 characters long.');
+          return;
+      }
+
+      const userType = email.endsWith('@tuwaiq.com') ? 'student' : 'admin';
+      const userData = { email, password };
+
+      try {
+          let endpoint;
+          if (userType === 'student') {
+              endpoint='http://localhost:5040/users/login/student';
+          } else {
+              endpoint='http://localhost:5040/users//login/admin';
+          }
+
+          const response = await axios.post(endpoint, userData);
+          if (response.status === 200) {
+            // Handle successful login
+            const loggedInUser = response.data.user; // Assuming the response contains user info
+            console.log(response.data.user);
+          localStorage.setItem('Username',loggedInUser.username);
+
+            // Redirect based on userType
+            if (loggedInUser.userType === 'student') {
+                navigate('/studentHome'); // Redirect to student home
+            } else {
+                navigate('/adminhome'); // Redirect to admin home
+            }
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        // Check if error response exists and contains a message
+        if (error.response && error.response.data && error.response.data.message) {
+            setErrorMessage(error.response.data.message);
+        } else {
+            setErrorMessage('There was an error logging in. Please try again later.');
+        }
+    }
+};
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-indigo-700 text-white p-4">
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-96 h-96 bg-blue-400 rounded-full opacity-30 top-[-100px] left-[-100px]"></div>
-        <div className="absolute w-80 h-80 bg-indigo-500 rounded-full opacity-20 top-[100px] right-[-80px]"></div>
-        <div className="absolute w-72 h-72 bg-blue-600 rounded-full opacity-25 bottom-[-150px] left-[-50px]"></div>
-      </div>
-
       <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-md relative z-10">
         <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
+        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block mb-1 font-medium" htmlFor="email">Email</label>
@@ -51,7 +89,7 @@ const StudentLogin = () => {
               className="border p-3 w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
               required
             />
-            <small className='text-gray-500 ml-2'>Please enter your registered email.</small>
+          <small className='text-[gray] ml-2'>When you are Students email contian @tuwaiq.com</small>
           </div>
           
           <div>
@@ -81,4 +119,4 @@ const StudentLogin = () => {
   );
 };
 
-export default StudentLogin;
+export default Login;
