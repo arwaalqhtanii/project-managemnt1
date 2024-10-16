@@ -1,4 +1,5 @@
 import React from 'react'
+import { FaEye } from "react-icons/fa";
 
 function StudentIdeaItems(props) {
 
@@ -21,7 +22,7 @@ function StudentIdeaItems(props) {
 
             <div className='flex justify-between items-center gap-x-[0.5rem]'>
 
-                <button className='h-[40px] px-[10px] rounded-[10px] bg-blue-600 text-white ' onClick={props.showDetailsFN}>Details</button>
+                <button className='h-[40px] px-[10px] rounded-[10px] bg-blue-600 text-white ' onClick={props.showDetailsFN}><FaEye></FaEye></button>
             </div>
 
 
