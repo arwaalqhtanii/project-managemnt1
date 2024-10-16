@@ -25,10 +25,13 @@ function Navbar() {
 
     
         <div className="hidden md:block">
-          <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full shadow-md transition duration-300">
-            Logout
+          <button className="group bg-transparent hover:bg-red-600 text-white px-4 py-2 rounded-full shadow-md transition duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" className="fill-red-500 group-hover:fill-white transition duration-300">
+            <path d="M806-440H320v-80h486l-62-62 56-58 160 160-160 160-56-58 62-62ZM600-600v-160H200v560h400v-160h80v160q0 33-23.5 56.5T600-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h400q33 0 56.5 23.5T680-760v160h-80Z"/>
+             </svg>
           </button>
         </div>
+
 
      
         <div className="md:hidden flex items-center">
@@ -48,7 +51,12 @@ function Navbar() {
           <a href="/about" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">About</a>
           <a href="/projects" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">Projects</a>
           <a href="/contact" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">Contact</a>
-          <a href="/logout" className="block py-3 px-6 hover:bg-red-600 text-red-500 transition duration-300">Logout</a>
+          
+          <button className="group bg-transparent hover:bg-red-600 text-white block py-3 px-6 rounded-full shadow-md transition duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" className="fill-red-500 group-hover:fill-white transition duration-300">
+            <path d="M806-440H320v-80h486l-62-62 56-58 160 160-160 160-56-58 62-62ZM600-600v-160H200v560h400v-160h80v160q0 33-23.5 56.5T600-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h400q33 0 56.5 23.5T680-760v160h-80Z"/>
+             </svg>
+          </button>
         </div>
       )}
     </nav>

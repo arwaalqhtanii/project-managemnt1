@@ -1,140 +1,136 @@
-
 import { CiSearch } from "react-icons/ci";
-
 import StudentIdeaItems from '../components/StudentIdeaItems';
-
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+
 function StudentIdeas() {
-
     function DeleteIdeaFN() {
-
+        // Logic to delete idea
     }
 
     function ShowDetailsFN() {
-
+        // Logic to show details
     }
+
     return (
-        <div className="container flex flex-col mx-auto gap-y-[1.5rem] relative">
-            <Navbar></Navbar>
-            <div className='flex justify-center w-[100vw]'>
-                <div className='w-[80vw] flex flex-col gap-y-[1rem] bg-white shadow-lg rounded-lg p-[20px]'>
-                    <div className='flex justify-between items-center h-[10vh]'>
-                        <div className="w-full flex justify-between  mb-4">
-                            <h2 className="text-3xl font-bold text-black border-b-4 border-[#2B39A0] pb-2 text-left">
-                                Student Ideas
-                            </h2>
-                            <div className='flex w-[50%] justify-center items-center'>
-                                <div className='h-[40px] w-[fit-content] px-[23px] flex justify-center bg-gray-200 rounded-l-[10px] items-center border-r-[1px] border-gray-400'>
-                                    <CiSearch></CiSearch>
-                                </div>
-                                <input type='search' className='h-[40px] w-[90%] bg-gray-200 rounded-r-[10px] focus:outline-none'></input>
+        <div className="flex flex-col h-screen bg-gray-100">
+            <Navbar />
+            <main className="flex-1 flex justify-center items-center pt-8 ">
+                <div className="w-full max-w-7xl bg-white rounded-lg shadow-lg overflow-hidden">
+                    <header className="bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white p-6 flex flex-col items-center">
+                        <h2 className="text-4xl font-bold">Student Ideas</h2>
+                        <div className="mt-4 w-full max-w-md">
+                            <div className="relative">
+                                <CiSearch className="absolute left-3 top-2 text-gray-400" />
+                                <input
+                                    type="search"
+                                    className="h-12 w-full bg-gray-200 pl-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                                    placeholder="Search..."
+                                />
                             </div>
                         </div>
+                    </header>
 
-                    </div>
-                    <div className='flex flex-col  w-[100%] border-[1px] bg-white shadow-lg rounded-lg h-[70vh] max-md:h-[100%] '>
-
-                        <div className='w-[100%] flex items-center h-[10vh] px-[20px] border-gray-200 border-b-[3px] rounded-t-[10px] bg-gradient-to-r from-[#676ea1] to-[#2B39A0]'>
-                            <p className='text-white font-semibold text-[1.2rem]'>Student name : {'yousef'}</p>
-
-                        </div>
-                        <div className='w-[100%] h-[60vh] flex max-md:h-[100%] max-md:flex-col'>
-
-                            <div className='w-[35%] max-md:w-[100%] max-md:h-[50%] h-[60vh] flex flex-col border-[1px]  rounded-bl-[10px]  overflow-y-scroll '>
-
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-6">
+                        {/* Left Side for Ideas List */}
+                        <div className="bg-gray-50 rounded-lg p-4 shadow-md h-full overflow-auto">
+                            <h3 className="font-semibold text-lg mb-4">Ideas List</h3>
+                            <div className="space-y-4">
                                 <StudentIdeaItems
                                     number='1'
-                                    title="project name"
+                                    title="Project 1"
                                     deleteFN={DeleteIdeaFN}
                                     showDetailsFN={ShowDetailsFN}
                                     status='pending'
-
-                                ></StudentIdeaItems>
+                                />
                                 <StudentIdeaItems
-                                    number='1'
-                                    title="project name"
+                                    number='2'
+                                    title="Project 2"
                                     deleteFN={DeleteIdeaFN}
                                     showDetailsFN={ShowDetailsFN}
                                     status='rejected'
-                                ></StudentIdeaItems>
+                                />
                                 <StudentIdeaItems
-                                    number='1'
-                                    title="project name"
+                                    number='3'
+                                    title="Project 3"
                                     deleteFN={DeleteIdeaFN}
                                     showDetailsFN={ShowDetailsFN}
                                     status='pending'
-
-                                ></StudentIdeaItems>
+                                />
                                 <StudentIdeaItems
-                                    number='1'
-                                    title="project name"
+                                    number='4'
+                                    title="Project 4"
                                     deleteFN={DeleteIdeaFN}
                                     showDetailsFN={ShowDetailsFN}
                                     status='approved'
-
-                                ></StudentIdeaItems>
+                                />
                                 <StudentIdeaItems
-                                    number='1'
-                                    title="project name"
+                                    number='5'
+                                    title="Project 5"
                                     deleteFN={DeleteIdeaFN}
                                     showDetailsFN={ShowDetailsFN}
                                     status='approved'
-
-                                ></StudentIdeaItems>
+                                />
                                 <StudentIdeaItems
-                                    number='1'
-                                    title="project name"
+                                    number='6'
+                                    title="Project 6"
                                     deleteFN={DeleteIdeaFN}
                                     showDetailsFN={ShowDetailsFN}
                                     status='approved'
-
-                                ></StudentIdeaItems>
+                                />
                                 <StudentIdeaItems
-                                    number='1'
-                                    title="project name"
+                                    number='7'
+                                    title="Project 7"
                                     deleteFN={DeleteIdeaFN}
                                     showDetailsFN={ShowDetailsFN}
                                     status='approved'
-
-                                ></StudentIdeaItems>
-
-
-
-                            </div>
-                            <div className='w-[65%] p-[20px] max-md:w-[100%] max-md:flex-col  h-[50vh] flex justify-between   rounded-br-[10px]'>
-
-                                <div className='flex max-md:w-[100%] flex-col gap-y-[0.3rem] w-[70%]'>
-                                    <div>
-                                    <p className='font-semibold'>Title</p>
-                                    <p className='h-[40px] bg-gray-100 rounded-lg px-[10px] flex items-center'>{'project title'}</p>
-                                    <p className='font-semibold'>Description</p>
-                                    <textarea className='min-h-[35vh] max-md:w-[100%] bg-gray-100 p-[10px] focus:outline-none rounded-lg'>
-
-                                    </textarea>
-                                    </div>
-
-                                    <div className='flex max-md:flex-col max-md:gap-y-[0.5rem] gap-x-[0.5rem]'>
-                                        <button className='h-[30px] bg-green-300 hover:bg-green-500 rounded-lg px-[23px] font-semibold'>Approved</button>
-                                        <button className='h-[30px] bg-yellow-300 hover:bg-yellow-500 rounded-lg px-[23px] font-semibold'>Rejected</button>
-                                        <button className='h-[30px] bg-red-300 hover:bg-red-500 rounded-lg px-[23px] font-semibold'>Delete</button>
-                                    </div>
-                                </div>
-                                <div className='w-[25%] flex flex-col gap-y-[0.3rem]'>
-                                    <p className='font-semibold'>Comment</p>
-                                    <textarea className='min-h-[45vh] bg-gray-100 p-[10px] focus:outline-none rounded-lg'></textarea>
-
-                                </div>
-
+                                />
                             </div>
                         </div>
 
+                        {/* Right Side for Idea Details */}
+                        <div className="bg-gray-50 rounded-lg p-4 shadow-md h-full">
+                            <h3 className="font-semibold text-lg mb-4">Idea Details</h3>
+                            <div className="mb-4">
+                                <label className="font-semibold">Title</label>
+                                <input
+                                    type="text"
+                                    className="h-12 w-full bg-white rounded-lg border border-gray-300 mt-2 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                    defaultValue="Project Title"
+                                />
+                            </div>
+                            <div className="mb-4">
+                                <label className="font-semibold">Description</label>
+                                <textarea
+                                    className="min-h-[35vh] bg-white border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full mt-2 rounded-lg"
+                                    placeholder="Enter description..."
+                                />
+                            </div>
+                            <div className="flex gap-3 mb-4">
+                                <button className="h-12 bg-green-500 hover:bg-green-600 text-white rounded-lg px-6 font-semibold shadow-md">
+                                    Approved
+                                </button>
+                                <button className="h-12 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg px-6 font-semibold shadow-md">
+                                    Rejected
+                                </button>
+                                <button className="h-12 bg-red-500 hover:bg-red-600 text-white rounded-lg px-6 font-semibold shadow-md">
+                                    Delete
+                                </button>
+                            </div>
+                            <div>
+                                <label className="font-semibold">Comment</label>
+                                <textarea
+                                    className="min-h-[25vh] bg-white border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 w-full mt-2 rounded-lg"
+                                    placeholder="Add your comments..."
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <Footer></Footer>
+            </main>
+            <Footer />
         </div>
-    )
+    );
 }
 
-export default StudentIdeas
+export default StudentIdeas;

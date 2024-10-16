@@ -10,6 +10,7 @@ import WelcomePage from "../pages/Welcome";
 import HomeAd from "../pages/HomeAd";
 import StudentHomePage from "../pages/StudentHomePage";
 import StudentIdeas from "../pages/StudentIdeas";
+import AddstudentPage from "../pages/AddstudentPage";
 const router = createBrowserRouter([
 
     {
@@ -55,7 +56,11 @@ const router = createBrowserRouter([
     {
         path:"/studentideas/:id",
         element:<StudentIdeas></StudentIdeas>
-    }
+    },
+    {
+        path: "/addstudent",
+        element: <AddstudentPage></AddstudentPage>
+    },
 ]);
 
 const Router = () => {
