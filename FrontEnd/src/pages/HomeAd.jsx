@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import axios from 'axios';
+
+
 
 function HomeAd() {
+  const name  = localStorage.getItem('Username');
+  const [counts, setCounts] = useState({
+    waiting: 0,
+    accepted: 0,
+    rejected: 0,
+    studentCount: 0,
+});
+
+const token = localStorage.getItem('Token'); // Replace with the actual token
+
+useEffect(() => {
+    const fetchCounts = async () => {
+        try {
+            const response = await axios.get('http://localhost:5040/projects/projects/admin/counts', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            setCounts(response.data.counts);
+            // Assuming studentCount is also in the response
+            setCounts(prev => ({ ...prev, studentCount: response.data.studentCount }));
+        } catch (error) {
+            console.error("Error fetching project counts:", error);
+        }
+    };
+
+    fetchCounts();
+}, []);
+
   return (
     <>
     <Navbar></Navbar>
@@ -11,7 +43,7 @@ function HomeAd() {
      
       <section className="relative bg-[#2b39a0] text-white py-24 px-12 overflow-hidden">
         <div className="container mx-auto text-center relative z-10">
-          <h1 className="text-5xl font-bold mb-4">Welcome Dima Al-Dosari</h1>
+          <h1 className="text-5xl font-bold mb-4">Welcome {name} </h1>
           <p className="text-xl mb-8">
             Welcome to the Graduation Project Management System. Here, you can manage and track your project ideas.
           </p>
@@ -35,7 +67,7 @@ function HomeAd() {
               <svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px" fill="#4A90E2">
                 <path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm240-320q33 0 56.5-23.5T560-640q0-33-23.5-56.5T480-720q-33 0-56.5 23.5T400-640q0 33 23.5 56.5T480-560Zm0-80Zm0 400Z"/>
               </svg>
-              <p className="text-4xl font-bold mt-6 text-gray-800">150</p>
+              <p className="text-4xl font-bold mt-6 text-gray-800">{counts.studentCount}</p>
               <p className="text-gray-600 mt-2 text-center">Number of Students</p>
             </div>
 
@@ -44,7 +76,7 @@ function HomeAd() {
               <svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px" fill="#F5A623">
                 <path d="M120-80v-60h100v-30h-60v-60h60v-30H120v-60h120q17 0 28.5 11.5T280-280v40q0 17-11.5 28.5T240-200q17 0 28.5 11.5T280-160v40q0 17-11.5 28.5T240-80H120Zm0-280v-110q0-17 11.5-28.5T160-510h60v-30H120v-60h120q17 0 28.5 11.5T280-560v70q0 17-11.5 28.5T240-450h-60v30h100v60H120Zm60-280v-180h-60v-60h120v240h-60Zm180 440v-80h480v80H360Zm0-240v-80h480v80H360Zm0-240v-80h480v80H360Z"/>
               </svg>
-              <p className="text-4xl font-bold mt-6 text-gray-800">25</p>
+              <p className="text-4xl font-bold mt-6 text-gray-800">{counts.waiting}</p>
               <p className="text-gray-600 mt-2 text-center">Pending Projects</p>
             </div>
 
@@ -53,7 +85,7 @@ function HomeAd() {
               <svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px" fill="#7ED321">
                 <path d="m438-240 226-226-58-58-169 169-84-84-57 57 142 142ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"/>
               </svg>
-              <p className="text-4xl font-bold mt-6 text-gray-800">120</p>
+              <p className="text-4xl font-bold mt-6 text-gray-800">{counts.accepted}</p>
               <p className="text-gray-600 mt-2 text-center">Accepted Projects</p>
             </div>
 
@@ -62,7 +94,7 @@ function HomeAd() {
               <svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px" fill="#D0021B">
                 <path d="M240-800v200-200 640-9.5 9.5-640Zm0 720q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v174q-19-7-39-10.5t-41-3.5v-120H520v-200H240v640h254q8 23 20 43t28 37H240Zm396-20-56-56 84-84-84-84 56-56 84 84 84-84 56 56-83 84 83 84-56 56-84-83-84 83Z"/>
               </svg>
-              <p className="text-4xl font-bold mt-6 text-gray-800">30</p>
+              <p className="text-4xl font-bold mt-6 text-gray-800">{counts.rejected}</p>
               <p className="text-gray-600 mt-2 text-center">Rejected Projects</p>
             </div>
 

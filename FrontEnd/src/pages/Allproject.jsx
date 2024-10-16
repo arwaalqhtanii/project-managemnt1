@@ -1,23 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import axios from 'axios';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 function Allproject() {
-  const data = [
-    { studentName: "Ahmad", projectTitle: "Mobile App", projectDescription: "A complete online shopping platform designed to enhance user experience, featuring a responsive layout, secure payment options, and a user-friendly interface." },
-    { studentName: "Khaled", projectTitle: "Website", projectDescription: "An innovative mobile application that allows users to track their workouts, monitor progress, and set fitness goals, with integration of social features to encourage community engagement." },
-    { studentName: "Yousef", projectTitle: "Tv-Module", projectDescription: "A strategic marketing initiative aimed at increasing brand awareness and engagement through targeted social media platforms, utilizing analytics to measure success and optimize outreach." },
-    { studentName: "Taraq", projectTitle: "Mobile App", projectDescription: "A comprehensive dashboard developed to visualize key metrics and analytics, enabling stakeholders to make informed decisions based on real-time data insights." },
-    { studentName: "Faisal", projectTitle: "Mobile App", projectDescription: "A conversational AI solution designed to improve customer service, providing instant responses to common inquiries and enhancing user satisfaction through personalized interactions." }
-  ];
+  const [projects, setProjects] = useState([]);
+    const token = localStorage.getItem('Token'); // Replace with the actual token
 
+    useEffect(() => {
+        const fetchAcceptedProjects = async () => {
+            try {
+                const response = await axios.get('http://localhost:5040/projects/projects/accepted', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setProjects(response.data); // Assuming response data contains projects
+            } catch (error) {
+                console.error("Error fetching accepted projects:", error);
+            }
+        };
+
+        fetchAcceptedProjects();
+    }, []);
+
+
+
+  
   const [currentPage, setCurrentPage] = useState(0);
   const rowsPerPage = 4;
 
   const start = currentPage * rowsPerPage;
-  const currentRows = data.slice(start, start + rowsPerPage);
-  const totalPages = Math.ceil(data.length / rowsPerPage);
+  const currentRows = projects.slice(start, start + rowsPerPage);
+  const totalPages = Math.ceil(projects.length / rowsPerPage);
 
   return (
     <div className="flex flex-col min-h-screen">

@@ -6,6 +6,9 @@ import User from '../Modulas/User.js';
 export const postProject = async (req, res) => {
     const { title, description } = req.body;
     const studentId = req.user.id; // Get the logged-in student's ID
+    if (!req.body.title || !req.body.description) {
+        return res.status(400).json({ message: 'Project name and description are required.' });
+    }
 
     try {
         const project = new Project({ title, description, studentId });

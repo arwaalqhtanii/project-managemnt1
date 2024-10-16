@@ -51,8 +51,10 @@ const Login = () => {
           if (response.status === 200) {
             // Handle successful login
             const loggedInUser = response.data.user; // Assuming the response contains user info
-            console.log(response.data.user);
+            console.log(response.data);
           localStorage.setItem('Username',loggedInUser.username);
+          localStorage.setItem('Token',response.data.token);
+
 
             // Redirect based on userType
             if (loggedInUser.userType === 'student') {

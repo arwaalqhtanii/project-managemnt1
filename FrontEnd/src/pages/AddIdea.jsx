@@ -4,24 +4,56 @@ import 'react-toastify/dist/ReactToastify.css';
 import idea from '../assets/idea.jpg';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import axios from 'axios';
 
 function AddIdea() {
-  const [projectName, setProjectName] = useState('');
+  const [title, setProjectName] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({ projectName, description });
-    setProjectName('');
-    setDescription('');
-    toast.success('Your project idea has been submitted successfully!'); // Toast message
+
+    const token = localStorage.getItem('Token');
+    console.log("Token being sent:", token);
+
+    const projectData = { title, description };
+    console.log("Submitting project data:", projectData);
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5040/projects/addProject',
+        projectData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      console.log('Project submitted successfully:', response.data);
+      setProjectName('');
+      setDescription('');
+      toast.success('Your project idea has been submitted successfully!');
+    } catch (error) {
+      console.error('Error submitting your project:', error);
+
+      if (error.response) {
+        const { status, data } = error.response;
+        toast.error(`Error ${status}: ${data.message || 'Something went wrong'}`);
+      } else if (error.request) {
+        toast.error('No response received from the server.');
+      } else {
+        toast.error(`Error: ${error.message}`);
+      }
+    }
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r">
       {/* Navbar */}
-      <Navbar/>
- 
+      <Navbar />
+
       {/* Main Content */}
       <div className="flex-grow flex flex-col min-h-screen md:flex-row items-center justify-center p-4">
         <div className="bg-slate-100 w-full max-w-lg shadow-lg rounded-lg p-6 mb-4 md:mb-0 md:mr-4">
@@ -31,20 +63,20 @@ function AddIdea() {
               <label className="block text-sm font-semibold text-gray-700">Project Name</label>
               <input
                 type="text"
-                value={projectName}
+                value={title}
                 onChange={(e) => setProjectName(e.target.value)}
-                className="mt-1 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-100"
+                className="mt-1 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
                 placeholder="Enter project name"
                 required
               />
             </div>
-            
+
             <div>
               <label className="block text-sm font-semibold text-gray-700">Description</label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="mt-1 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out transform hover:scale-100"
+                className="mt-1 p-3 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 ease-in-out"
                 rows="4"
                 placeholder="Describe your project idea"
                 required
@@ -53,7 +85,7 @@ function AddIdea() {
 
             <button
               type="submit"
-              className="w-full bg-[#2B39A0] text-white p-3 rounded-md hover:bg-[gray] transition duration-300 font-semibold shadow-lg transform hover:scale-105"
+              className="w-full bg-[#2B39A0] text-white p-3 rounded-md hover:bg-gray-700 transition duration-300 font-semibold shadow-lg transform hover:scale-105"
             >
               Submit Project
             </button>
@@ -63,9 +95,9 @@ function AddIdea() {
             </p>
           </form>
         </div>
-        
+
         {/* Image on the right */}
-        <div className="hidden md:block w-full max-w-md  lg:ml-20">
+        <div className="hidden md:block w-full max-w-md lg:ml-20">
           <img 
             src={idea} 
             alt="Project Idea" 
@@ -75,10 +107,7 @@ function AddIdea() {
       </div>
 
       {/* Footer */}
-      <Footer/>
-      {/* <footer className="w-full bg-blue-600 p-4 text-white text-center mt-4">
-        <p>&copy; 2024 My Project Management</p>
-      </footer> */}
+      <Footer />
 
       {/* Toast Container */}
       <ToastContainer />

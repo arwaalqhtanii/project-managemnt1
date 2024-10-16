@@ -1,63 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight, FaPlus } from 'react-icons/fa'; 
 import { useNavigate } from 'react-router-dom'; 
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import axios from 'axios';
+
 
 function Myproject() {
+  const [projects, setProjects] = useState([]);
+  const token = localStorage.getItem('Token'); // Replace with the actual token
+
+  useEffect(() => {
+      const fetchProjects = async () => {
+          try {
+              const response = await axios.get('http://localhost:5040/projects/my-projects', {
+                  headers: {
+                      Authorization: `Bearer ${token}`,
+                  },
+              });
+              console.log(response.data.projects);
+              
+              setProjects(response.data.projects); // Assuming the response contains a 'projects' array
+         
+            } catch (error) {
+              console.error("Error fetching projects:", error);
+          }
+      };
+
+      fetchProjects();
+  }, []);
+
+
+
   const [currentPage, setCurrentPage] = useState(0);
   const rowsPerPage = 4;
 
-  const [projects] = useState([
-    { 
-      name: "Mobile App Development", 
-      description: "A user-friendly mobile application for online shopping, featuring a responsive design and secure payment options.", 
-      status: "Accepted", 
-      comments: "Excellent execution and innovative features!" 
-    },
-    { 
-      name: "E-commerce Website", 
-      description: "A complete e-commerce solution that allows users to browse products and make purchases online with ease.", 
-      status: "Waiting", 
-      comments: "Waiting for final feedback from the admin." 
-    },
-    { 
-      name: "Social Media Marketing Strategy", 
-      description: "A comprehensive strategy aimed at boosting online presence and engagement through targeted social media campaigns.", 
-      status: "Rejected", 
-      comments: "Needs more data-driven insights and measurable outcomes." 
-    },
-    { 
-      name: "Fitness Tracking App", 
-      description: "An interactive app that helps users track their workouts, monitor progress, and set fitness goals.", 
-      status: "Accepted", 
-      comments: "Great job on user interface and overall functionality!" 
-    },
-    { 
-      name: "Blog Website", 
-      description: "A simple yet effective blog platform allowing users to publish articles and share insights with the community.", 
-      status: "Waiting", 
-      comments: "Pending review for design improvements." 
-    },
-    { 
-      name: "Project Management Tool", 
-      description: "A project management application designed to streamline task allocation and progress tracking among team members.", 
-      status: "Accepted", 
-      comments: "Impressive tool with great user feedback!" 
-    },
-    { 
-      name: "Event Management System", 
-      description: "An integrated system for planning and managing events, including ticketing and attendee tracking.", 
-      status: "Rejected", 
-      comments: "Revisions needed for better user engagement." 
-    },
-    { 
-      name: "Recipe Sharing Platform", 
-      description: "A community-driven platform for sharing and discovering new recipes, with features for user ratings and comments.", 
-      status: "Accepted", 
-      comments: "Fantastic community features and design!" 
-    },
-  ]);
+ 
 
   const totalPages = Math.ceil(projects.length / rowsPerPage);
   const currentRows = projects.slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage);
@@ -68,7 +46,7 @@ function Myproject() {
         return 'bg-green-500 text-white';
       case 'Rejected':
         return 'bg-red-500 text-white';
-      case 'Waiting':
+      case 'waiting':
         return 'bg-yellow-500 text-black';
       default:
         return 'bg-gray-300 text-black';
@@ -114,13 +92,13 @@ function Myproject() {
                 {currentRows.map((project, index) => (
                   <tr key={index} className="hover:bg-blue-50 transition duration-300">
                     <td className="hidden md:table-cell p-4 text-center border-b border-gray-200 text-gray-800">
-                      {project.name}
+                      {project.title}
                     </td>
 
                     {/* Responsive View for Mobile */}
                     <td className="block md:hidden p-4 text-center border-b border-gray-200 text-gray-800">
                       <div className="flex flex-col h-full justify-between">
-                        <div className="text-sm text-gray-600">{project.name}</div>
+                        <div className="text-sm text-gray-600">{project.title}</div>
                         <div className="text-sm font-semibold mt-1">
                           <div className={`py-1 mt-2 px-3 rounded-full ${getStatusClass(project.status)}`}>
                             {project.status}
@@ -139,7 +117,7 @@ function Myproject() {
 
                     <td className="p-4 max-sm:p-1 text-center border-b border-gray-200 text-gray-800">
                       <div className="bg-gray-100 p-2 rounded-lg text-gray-700 h-full">
-                        {project.comments}
+                        {project.comments }
                       </div>
                     </td>
                   </tr>
