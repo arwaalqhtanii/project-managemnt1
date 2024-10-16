@@ -1,46 +1,56 @@
-import React from 'react'
+import React from 'react';
 import { CiSearch } from "react-icons/ci";
+import AddstudentItems from './AddstudentItems';
 
-import AddstudentItems from './AddstudentItems'
 function Addstudent(props) {
     return (
-        <div>
+        <div className="relative">
 
+            {/* خلفية مظلمة */}
+            <div className='h-full w-full bg-black opacity-70 fixed top-0 left-0 z-[999]'></div>
 
-            <div className='h-[100%] w-[100vw] bg-black opacity-70 absolute z-[99999999999]'></div>
-            <div className='w-[40vw] h-[80vh] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-75%] z-[999999999999999999999] absolute flex flex-col items-center gap-y-[0.5rem] rounded-[15px] bg-white'>
-                <div className='w-[100%] flex justify-between p-[20px]'>
-                    <p className='font-bold text-[1.2rem] text-[#091057] border-b-4 border-[#2B39A0] pb-2'>Add Students</p>
-                    <button className='bg-red-500 text-white rounded-[15px] px-[10px] py-[5px]' onClick={props.hidePopFN}>Close</button>
+            {/* نافذة البوبوب */}
+            <div className='w-full sm:w-[90vw] md:w-[60vw] lg:w-[40vw] h-[80vh] left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 absolute flex flex-col items-center gap-y-4 rounded-lg bg-white shadow-lg z-[1000] overflow-hidden'>
+                <div className='w-full flex justify-between p-5'>
+                    <p className='font-bold text-xl text-[#091057] border-b-4 border-[#2B39A0] pb-2'>Add Students</p>
+                    <button className='bg-red-500 text-white rounded-lg px-3 py-1' onClick={props.hidePopFN}>Close</button>
                 </div>
-                <div className='w-[100%] flex justify-center'>
-                    <div className='h-[40px] flex justify-center items-center w-[5%] rounded-l-[5px] bg-gray-200'>
-                        <CiSearch className='text-[1.5rem]'></CiSearch>
+
+                {/* شريط البحث */}
+                <div className='w-full flex justify-center mb-4'>
+                    <div className='flex items-center w-full'>
+                        <div className='h-10 flex justify-center items-center rounded-l-md bg-gray-200 px-3'>
+                            <CiSearch className='text-2xl' />
+                        </div>
+                        <input 
+                            className='w-full h-10 rounded-r-md bg-gray-200 shadow-lg px-4 focus:outline-none' 
+                            placeholder='Search by name' 
+                            type='search' 
+                        />
                     </div>
-                    <input className='w-[75%] h-[40px] rounded-r-[5px] bg-gray-200 shadow-lg px-[1rem] focus:outline-none' placeholder='Search by name' type='search'></input>
-
                 </div>
-                <div className='w-[100%] flex flex-col items-center overflow-y-scroll gap-y-[0.5rem] pb-[20px]'>
+
+                {/* قائمة الطلاب */}
+                <div className='w-full flex flex-col items-center overflow-y-auto gap-y-2 pb-4'>
                     <AddstudentItems
                         name='Yousef'
                         studentEmail='yohejazi@gmail.com'
                         viewIdeasFN={() => ('5')}
                     />
                     <AddstudentItems
-                        name='Yousef'
-                        studentEmail='yohejazi@gmail.com'
+                        name='Khaled'
+                        studentEmail='khaled@example.com'
                         viewIdeasFN={() => ('5')}
                     />
                     <AddstudentItems
-                        name='Yousef'
-                        studentEmail='yohejazi@gmail.com'
+                        name='Ahmad'
+                        studentEmail='ahmad@example.com'
                         viewIdeasFN={() => ('5')}
                     />
                 </div>
             </div>
-
         </div>
-    )
+    );
 }
 
-export default Addstudent
+export default Addstudent;
