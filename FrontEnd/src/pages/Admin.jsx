@@ -66,7 +66,6 @@ function Admin() {
                                 placeholder="Search for a student..."
                             />
                         </div>
-                        {/* Button for larger screens */}
                         <button
                             className="hidden md:flex items-center bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white px-4 py-2 rounded-md shadow hover:shadow-md transition duration-300 transform hover:-translate-y-1 focus:outline-none"
                             onClick={() => navigate('/addstudent')}
@@ -89,7 +88,7 @@ function Admin() {
                         <table className="min-w-full bg-white rounded-lg">
                             <thead>
                                 <tr className="bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white">
-                                    <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Name</th>
+                                    <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold hidden md:table-cell">Name</th>
                                     <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Email</th>
                                     <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Actions</th>
                                 </tr>
@@ -97,8 +96,8 @@ function Admin() {
                             <tbody>
                                 {currentRows.map((student, index) => (
                                     <tr key={index} className="hover:bg-blue-50 transition duration-300">
-                                        <td className="p-4 text-center border-b border-gray-200 text-gray-800">{student.name}</td>
-                                        <td className="p-4 text-center border-b border-gray-200 text-gray-800">{student.email}</td>
+                                        <td className="p-4 text-center border-b border-gray-200 text-gray-800 hidden md:table-cell">{student.name}</td>
+                                        <td className="p-4 text-center border-b border-gray-200 text-gray-800 text-sm md:text-base">{student.email}</td>
                                         <td className="p-4 text-center border-b border-gray-200 text-gray-800">
                                             <div className="flex flex-col md:flex-row justify-center items-center space-x-0 md:space-x-4">
                                                 <button 

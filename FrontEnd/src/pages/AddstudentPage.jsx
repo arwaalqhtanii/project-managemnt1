@@ -74,8 +74,8 @@ function AddstudentPage() {
                     <div className='w-full flex flex-col items-center overflow-y-auto gap-y-2 pb-4'>
                         {/* عناوين الجدول */}
                         <div className='flex w-full justify-between items-center py-2 border-b-2 border-gray-300'>
-                            <p className='font-semibold'>Name</p>
-                            <p className='font-semibold'>Email</p>
+                            <p className='font-semibold hidden md:block'>Name</p>
+                            <p className='font-semibold text-sm'>Email</p>
                             <p className='w-[50px]'></p>
                         </div>
                         {/* بيانات الطلاب */}
@@ -92,7 +92,7 @@ function AddstudentPage() {
                     {/* Modal for success message */}
                     {isModalOpen && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                            <div className="bg-white rounded-lg shadow-lg p-6 w-1/3">
+                            <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-1/3">
                                 <h3 className="text-lg font-semibold mb-4">Success</h3>
                                 <p>{modalMessage}</p>
                                 <button

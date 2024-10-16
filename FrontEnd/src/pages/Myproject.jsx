@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
+import NavbarStudent from '../components/NavbarStudent';
 
 
 function Myproject() {
@@ -61,7 +62,7 @@ function Myproject() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar/>
+    <NavbarStudent></NavbarStudent>
   
       <div className="flex-grow flex min-h-screen flex-col items-center justify-center p-4 max-sm:p-1">
         <div className="w-full max-w-7xl bg-white shadow-lg rounded-lg p-6 max-sm:p-3 flex flex-col overflow-hidden">
