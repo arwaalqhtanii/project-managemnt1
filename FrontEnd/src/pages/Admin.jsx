@@ -89,6 +89,10 @@ function Admin() {
     const [searchQuery, setSearchQuery] = useState(''); 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
 =======
     
 >>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
@@ -122,14 +126,20 @@ function Admin() {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     function DeleteStudentFN(){
 
     }
 =======
+=======
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
   
     const filteredStudents = students.filter(student =>
         student.username.toLowerCase().includes(searchQuery.toLowerCase())
     );
+<<<<<<< HEAD
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
+=======
 >>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
 
     return (
@@ -151,8 +161,11 @@ function Admin() {
                                 <CiSearch />
                             </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <input type='search' className='h-[40px] w-[90%]  bg-gray-200 rounded-r-[10px] focus:outline-none' />
 =======
+=======
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
                             <input 
                                 type='search' 
                                 className='h-[40px] w-[90%] bg-gray-200 rounded-r-[10px] focus:outline-none' 
@@ -160,6 +173,9 @@ function Admin() {
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)} 
                             />
+<<<<<<< HEAD
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
+=======
 >>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
                         </div>
                         <button
@@ -175,6 +191,7 @@ function Admin() {
                             <p className='text-[1.2rem] text-white font-semibold'>Email</p>
                             <p className='w-[10vw]'></p>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
                         </div>
@@ -188,6 +205,10 @@ function Admin() {
 =======
                         </div>
                         <div className='w-[100%] flex flex-col overflow-y-auto'>
+=======
+                        </div>
+                        <div className='w-[100%] flex flex-col overflow-y-auto'>
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
                             {filteredStudents.length > 0 ? (
                                 filteredStudents.map((student) => (
                                     <StudentAdminItems
@@ -201,6 +222,9 @@ function Admin() {
                             ) : (
                                 <p className='text-center'>No students found.</p>
                             )}
+<<<<<<< HEAD
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
+=======
 >>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
                         </div>
                     </div>

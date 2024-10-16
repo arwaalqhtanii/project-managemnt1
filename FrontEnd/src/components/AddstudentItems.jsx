@@ -60,6 +60,9 @@ function AddstudentItems(props) {
           </div>
       </div>
   );
+<<<<<<< HEAD
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
+=======
 >>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
 }
 

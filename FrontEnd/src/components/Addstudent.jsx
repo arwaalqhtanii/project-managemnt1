@@ -2,6 +2,7 @@
 // import { CiSearch } from "react-icons/ci";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import AddstudentItems from './AddstudentItems'
 function Addstudent(props) {
     return (
@@ -9,6 +10,8 @@ function Addstudent(props) {
 
 
 =======
+=======
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
 // import AddstudentItems from './AddstudentItems'
 // function Addstudent(props) {
 //   return (
@@ -91,6 +94,9 @@ function Addstudent(props) {
 
     return (
         <div>
+<<<<<<< HEAD
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
+=======
 >>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
             <div className='h-[100%] w-[100vw] bg-black opacity-70 absolute z-[99999999999]'></div>
             <div className='w-[40vw] h-[80vh] left-[50%] top-[50%] translate-x-[-50%] translate-y-[-75%] z-[999999999999999999999] absolute flex flex-col items-center gap-y-[0.5rem] rounded-[15px] bg-white'>
@@ -102,6 +108,7 @@ function Addstudent(props) {
                     <div className='h-[40px] flex justify-center items-center w-[5%] rounded-l-[5px] bg-gray-200'>
                         <CiSearch className='text-[1.5rem]'></CiSearch>
                     </div>
+<<<<<<< HEAD
 <<<<<<< HEAD
                     <input className='w-[75%] h-[40px] rounded-r-[5px] bg-gray-200 shadow-lg px-[1rem] focus:outline-none' placeholder='Search by name' type='search'></input>
 
@@ -138,6 +145,18 @@ function Addstudent(props) {
                 </div>
                 <div className='w-[100%] flex flex-col items-center overflow-y-scroll gap-y-[0.5rem] pb-[20px]'>
 
+=======
+                    <input
+                        className='w-[75%] h-[40px] rounded-r-[5px] bg-gray-200 shadow-lg px-[1rem] focus:outline-none'
+                        placeholder='Search by name'
+                        type='search'
+                        value={searchQuery}
+                        onChange={handleSearchChange}
+                    />
+                </div>
+                <div className='w-[100%] flex flex-col items-center overflow-y-scroll gap-y-[0.5rem] pb-[20px]'>
+
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
 
                     {/* عرض الطلاب بعد الفلترة */}
 
@@ -158,6 +177,9 @@ function Addstudent(props) {
             </div>
         </div>
     );
+<<<<<<< HEAD
+>>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
+=======
 >>>>>>> 6e36054463a49de33d2bd572f2f60f1724cc2acb
 }
 
