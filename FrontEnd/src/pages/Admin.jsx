@@ -1,51 +1,52 @@
-import React,{ useState,useEffect } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight, FaPlus } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
+import { AiOutlineClose } from "react-icons/ai"; // استيراد أيقونة الإزالة
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Addstudent from '../components/Addstudent';
 import axios from 'axios';
 
-
 function Admin() {
     const navigate = useNavigate();
     const [addPopStatus, setAddStatus] = useState(false);
     const [currentPage, setCurrentPage] = useState(0);
+    const [searchTerm, setSearchTerm] = useState('');
     const rowsPerPage = 4;
 
     const [studentsData, setStudentsData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
-  
+
     useEffect(() => {
-      const fetchAssignedStudents = async () => {
-        try {
-          const response = await axios.get('http://localhost:5040/users/assignedStudents', {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('Token')}`, // Include token if required
-            },
-          });
-          setStudentsData(response.data.assignedStudents); // Set the received students data
-        } catch (err) {
-          setError('Failed to fetch assigned students');
-          console.error(err);
-        } finally {
-          setLoading(false);
-        }
-      };
-  
-      fetchAssignedStudents();
+        const fetchAssignedStudents = async () => {
+            try {
+                const response = await axios.get('http://localhost:5040/users/assignedStudents', {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('Token')}`,
+                    },
+                });
+                setStudentsData(response.data.assignedStudents);
+            } catch (err) {
+                setError('Failed to fetch assigned students');
+                console.error(err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAssignedStudents();
     }, []);
-  
+
     if (loading) {
-      return <div>Loading...</div>;
-    }
-  
-    if (error) {
-      return <div>{error}</div>;
+        return <div>Loading...</div>;
     }
 
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     const start = currentPage * rowsPerPage;
     const currentRows = studentsData.slice(start, start + rowsPerPage);
@@ -60,18 +61,21 @@ function Admin() {
     }
 
     function showIdeasFN(index) {
-        console.log("hiiii"+index);
         if (index !== undefined) {
             navigate(`/studentideas/${index}`);
         } else {
             console.error("Index is undefined");
         }
-        // navigate(`/studentideas/${index}`);
     }
 
     function DeleteStudentFN() {
         // Logic to delete a student
     }
+
+    // تنظيف شريط البحث
+    const clearSearch = () => {
+        setSearchTerm('');
+    };
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -88,16 +92,32 @@ function Admin() {
                         </h1>
                     </div>
                     <div className='flex w-full mb-4 justify-between items-center'>
-                        <div className='flex w-1/2 justify-center items-center mx-auto'>
-                            <div className='h-[35px] w-[fit-content] px-[15px] flex justify-center bg-gray-200 rounded-l-[10px] items-center border-r-[1px] border-gray-400'>
-                                <CiSearch />
+                        {/* شريط البحث المعدل */}
+                        <div className='flex w-1/2 justify-start items-center mx-auto'>
+                            <div className='relative w-80'>
+                                <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+                                    <CiSearch className="text-gray-500" />
+                                </div>
+                                <input
+                                    type='search'
+                                    className='block w-full pl-10 pr-6 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm'
+                                    placeholder="Search for a student..."
+                                    value={searchTerm}
+                                    autoComplete="off"
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                                {searchTerm && (
+                                    <div className="absolute inset-y-0 right-0 flex items-center pr-3">
+                                        <AiOutlineClose
+                                            className="text-gray-500 cursor-pointer"
+                                            onClick={clearSearch}
+                                        />
+                                    </div>
+                                )}
                             </div>
-                            <input
-                                type='search'
-                                className='h-[35px] w-80 bg-gray-200 rounded-r-[10px] focus:outline-none px-2'
-                                placeholder="Search for a student..."
-                            />
                         </div>
+
+                        {/* زر إضافة طالب */}
                         <button
                             className="hidden md:flex items-center bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white px-4 py-2 rounded-md shadow hover:shadow-md transition duration-300 transform hover:-translate-y-1 focus:outline-none"
                             onClick={() => navigate('/addstudent')}
@@ -126,7 +146,12 @@ function Admin() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {currentRows.map((student, index) => (
+                                {currentRows
+                                    .filter(student => 
+                                        student.username.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                                        student.email.toLowerCase().includes(searchTerm.toLowerCase())
+                                    )
+                                    .map((student, index) => (
                                     <tr key={index} className="hover:bg-blue-50 transition duration-300">
                                         <td className="p-4 text-center border-b border-gray-200 text-gray-800 hidden md:table-cell">{student.username}</td>
                                         <td className="p-4 text-center border-b border-gray-200 text-gray-800 text-sm md:text-base">{student.email}</td>
@@ -136,7 +161,6 @@ function Admin() {
                                                     onClick={() => showIdeasFN(student._id)} 
                                                     className="flex items-center text-[#3a46a1] hover:text-blue-500 mb-2 md:mb-0"
                                                 >
-                                                    {/* View Ideas Icon */}
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#3a46a1">
                                                         <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" />
                                                     </svg>
@@ -145,7 +169,6 @@ function Admin() {
                                                     onClick={DeleteStudentFN} 
                                                     className="flex items-center text-red-600 hover:text-red-400"
                                                 >
-                                                    {/* Delete Icon */}
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ff0000">
                                                         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
                                                     </svg>

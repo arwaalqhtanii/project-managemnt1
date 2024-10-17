@@ -8,16 +8,18 @@ import { useParams } from 'react-router-dom';
 
 function StudentIdeas() {
     const { studentId } = useParams();
+
+    console.log("test"+studentId);
+    
     const [projects, setProjects] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [selectedProject, setSelectedProject] = useState([]);
-    const [isRejected, setIsRejected] = useState(false); // Track if rejected
-    const[comment,setComment]=useState('');
 
     useEffect(() => {
         const fetchProjects = async () => {
             const token = localStorage.getItem('Token'); // Retrieve the token
+            console.log(token);
+            
             if (!token) {
                 setError('No token found. Please log in.');
                 return;
@@ -28,7 +30,10 @@ function StudentIdeas() {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setProjects(response.data.projects);
+                console.log(response.data.projects);
+                
+              
+                setProjects(response.data.projects); // Adjust based on your response structure
                 setLoading(false);
             } catch (err) {
                 setError('Error fetching projects: ' + (err.response?.data?.message || err.message));
@@ -38,49 +43,15 @@ function StudentIdeas() {
         fetchProjects();
     }, [studentId]);
 
-    const ShowDetailsFN = async (projectId) => {
-        const token = localStorage.getItem('Token');
-        try {
-            const response = await axios.get(`http://localhost:5040/projects/admin/projects/${projectId}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            setSelectedProject(response.data.project);
-        } catch (error) {
-            console.error('Error fetching project details:', error);
-        }
-    };
 
-    const handleRejectClick = async () => {
-        setIsRejected(true); // Set isRejected to true when rejected
-        await updateProjectStatus("rejected");
-    };
 
-    const handleApproveClick = async () => {
-        await updateProjectStatus("approved");
-    };
+    function DeleteIdeaFN() {
+        // Logic to delete idea
+    }
 
-    const updateProjectStatus = async (status) => {
-        const token = localStorage.getItem('Token');
-        const projectId = selectedProject._id; // Assuming the project ID is stored in _id
-
-        try {   
-            const response = await axios.patch(`http://localhost:5040/projects/updateProject/${projectId}`, {
-                status,
-                comment,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
-            console.log('Project updated successfully:', response.data);
-            // Optionally, you can refresh the project list or show a success message
-        } catch (error) {
-            console.error('Error updating project status:', error);
-            setError('Error updating project status: ' + (error.response?.data?.message || error.message));
-        }
-    };
+    function ShowDetailsFN() {
+        // Logic to show details
+    }
 
     return (
         <div className="flex flex-col h-screen bg-gray-100">
@@ -89,14 +60,15 @@ function StudentIdeas() {
                 <div className="w-full max-w-7xl bg-white rounded-lg shadow-lg overflow-hidden">
                     <header className="bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white p-6 flex flex-col items-center">
                         <h2 className="text-4xl font-bold">Student Ideas</h2>
-                        <h1>{error}</h1>
                         <div className="mt-4 w-full max-w-md">
+                            <h1>{error}</h1>
                             <div className="relative">
-                                <CiSearch className="absolute left-3 top-2 text-gray-400" />
                                 <input
                                     type="search"
-                                    className="h-12 w-full bg-gray-200 pl-10 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-black"
+                                    className="h-12 w-full bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-black pl-4 pr-10" // تعديل العرض والمسافات
                                     placeholder="Search..."
+                                    value={searchTerm} // ربط قيمة البحث بحالة البحث
+                                    onChange={(e) => setSearchTerm(e.target.value)} // تحديث حالة البحث عند الكتابة
                                 />
                             </div>
                         </div>
@@ -111,14 +83,17 @@ function StudentIdeas() {
                                     <p>Loading projects...</p>
                                 ) : (
                                     projects.map((project, index) => (
+                                        <>
+                                        <h1>test</h1>
                                         <StudentIdeaItems
                                             key={project.projectId}
                                             number={index + 1}
                                             title={project.title}
-                                            deleteFN={() => { /* Logic to delete idea */ }}
-                                            showDetailsFN={() => ShowDetailsFN(project.projectId)}
+                                            deleteFN={DeleteIdeaFN}
+                                            showDetailsFN={ShowDetailsFN}
                                             status={project.status}
                                         />
+                                        </>
                                     ))
                                 )}
                             </div>
