@@ -166,9 +166,6 @@ export const getProjectsForStudent = async (req, res) => {
 
 
 
-
-
-
 //update project status  and comments from admin
 export const updateProjectStatus = async (req, res) => {
     const { id } = req.params;
@@ -334,7 +331,32 @@ export const getAdminProjectCounts = async (req, res) => {
 };
 
 
+// New function to get project by ID
+export const getProjectById = async (req, res) => {
+    const adminId = req.user.id; // Ensure this is set correctly
+    const projectId = req.params.id;
 
+    try {
+        const project = await Project.findById(projectId);
+
+        if (!project || project.deleted) {
+            return res.status(404).json({ message: 'Project not found.' });
+        }
+
+        // Optionally check if the project belongs to a student assigned to the admin
+        const student = await User.findById(project.studentId);
+        const admin = await User.findById(adminId).populate('assignedStudents');
+
+        if (!admin.assignedStudents.some(s => s._id.equals(student._id))) {
+            return res.status(403).json({ message: 'You do not have permission to view this project.' });
+        }
+
+        res.status(200).json({ project });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
 
 
 

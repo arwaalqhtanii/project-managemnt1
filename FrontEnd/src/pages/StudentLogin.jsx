@@ -15,57 +15,53 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
+    e.preventDefault();
+    setErrorMessage('');
 
-      // Reset error message
-      setErrorMessage('');
+    if (!email || !password) {
+        setErrorMessage('Both email and password are required.');
+        return;
+    }
 
-      // Validate inputs
-      if (!email || !password) {
-          setErrorMessage('Both email and password are required.');
-          return;
-      }
+    if (!validateEmail(email)) {
+        setErrorMessage('Please enter a valid email address.');
+        return;
+    }
 
-      if (!validateEmail(email)) {
-          setErrorMessage('Please enter a valid email address.');
-          return;
-      }
+    if (password.length <= 5) {
+        setErrorMessage('Password must be more than 5 characters long.');
+        return;
+    }
 
-      if (password.length <= 5) {
-          setErrorMessage('Password must be more than 5 characters long.');
-          return;
-      }
+    const userType = email.endsWith('@tuwaiq.com') ? 'student' : 'admin';
+    const userData = { email, password };
+    let endpoint;
 
-      const userType = email.endsWith('@tuwaiq.com') ? 'student' : 'admin';
-      const userData = { email, password };
+    if (userType === 'student') {
+        endpoint = 'http://localhost:5040/users/login/student';
+    } else {
+        endpoint = 'http://localhost:5040/users/login/admin'; // Fixed double slash
+    }
 
-      try {
-          let endpoint;
-          if (userType === 'student') {
-              endpoint='http://localhost:5040/users/login/student';
-          } else {
-              endpoint='http://localhost:5040/users//login/admin';
-          }
+    console.log('User data:', userData);
+    console.log('Endpoint:', endpoint);
 
-          const response = await axios.post(endpoint, userData);
-          if (response.status === 200) {
-            // Handle successful login
+    try {
+        const response = await axios.post(endpoint, userData);
+        if (response.status === 200) {
             const loggedInUser = response.data.user; // Assuming the response contains user info
             console.log(response.data);
-          localStorage.setItem('Username',loggedInUser.username);
-          localStorage.setItem('Token',response.data.token);
+            localStorage.setItem('Username', loggedInUser.username);
+            localStorage.setItem('Token', response.data.token);
 
-
-            // Redirect based on userType
             if (loggedInUser.userType === 'student') {
-                navigate('/studentHome'); // Redirect to student home
+                navigate('/studentHome');
             } else {
-                navigate('/adminhome'); // Redirect to admin home
+                navigate('/adminhome');
             }
         }
     } catch (error) {
-        console.error('Error:', error);
-        // Check if error response exists and contains a message
+        console.error('Error:', error.response || error.message);
         if (error.response && error.response.data && error.response.data.message) {
             setErrorMessage(error.response.data.message);
         } else {
@@ -73,6 +69,7 @@ const Login = () => {
         }
     }
 };
+
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-indigo-700 text-white p-4">

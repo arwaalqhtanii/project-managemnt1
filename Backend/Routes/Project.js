@@ -1,5 +1,5 @@
 import express from 'express';
-import { postProject,getProjectsForStudents ,deleteProject,getProjectsForStudent,getProjectsForAdminStudent,getProjectsForAdmin,updateProjectStatus,getAcceptedProjectsFromAdmin,deleteProjectAdmin,getStudentProjectCounts,getAdminProjectCounts} from '../Controllers/projectController.js';
+import { postProject,getProjectsForStudents ,deleteProject,getProjectsForStudent,getProjectById,getProjectsForAdminStudent,getProjectsForAdmin,updateProjectStatus,getAcceptedProjectsFromAdmin,deleteProjectAdmin,getStudentProjectCounts,getAdminProjectCounts} from '../Controllers/projectController.js';
 import { authenticateToken } from '../Middleware/Auth.js';
 
 const router = express.Router();
@@ -15,6 +15,7 @@ router.get('/projects/student/counts', authenticateToken, getStudentProjectCount
 router.get('/projects/admin/counts', authenticateToken, getAdminProjectCounts);
 router.get('/projects/admin/students', authenticateToken, getProjectsForAdminStudent);//get project for her students
 router.get('/projects/student/:studentId',authenticateToken, getProjectsForStudent);
+router.get('/admin/projects/:id', authenticateToken, getProjectById); // New endpoint
 
 
 export default router;
