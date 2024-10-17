@@ -118,7 +118,7 @@ function Admin() {
                     </div>
                     <div className='flex w-full mb-4 justify-between items-center'>
                         {/* شريط البحث المعدل */}
-                        <div className='flex w-1/2 justify-start items-center mx-auto'>
+                        <div className='flex md:w-[90%] max-sm:w-1/2 justify-start items-center mx-auto'>
                             <div className='relative w-80'>
                                 <div className='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
                                     <CiSearch className="text-gray-500" />
@@ -144,7 +144,7 @@ function Admin() {
 
                         {/* زر إضافة طالب */}
                         <button
-                            className="hidden md:flex items-center bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white px-4 py-2 rounded-md shadow hover:shadow-md transition duration-300 transform hover:-translate-y-1 focus:outline-none"
+                            className="hidden md:flex items-center bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white px-2 py-1 rounded-md shadow hover:shadow-md transition duration-300 transform hover:-translate-y-1 focus:outline-none"
                             onClick={() => navigate('/addstudent')}
                         >
                             <FaPlus className="mr-2 w-4 h-4" /> Add Student

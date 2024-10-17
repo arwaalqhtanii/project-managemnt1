@@ -73,6 +73,11 @@ const Login = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-900 to-indigo-700 text-white p-4">
+     <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute w-96 h-96 bg-blue-400 rounded-full opacity-30 top-[-100px] left-[-100px]"></div>
+        <div className="absolute w-80 h-80 bg-indigo-500 rounded-full opacity-20 top-[100px] right-[-80px]"></div>
+        <div className="absolute w-72 h-72 bg-blue-600 rounded-full opacity-25 bottom-[-150px] left-[-50px]"></div>
+      </div>
       <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-md relative z-10">
         <h2 className="text-2xl font-bold mb-6 text-center">Welcome Back</h2>
         {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
