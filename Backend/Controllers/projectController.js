@@ -225,6 +225,42 @@ export const getAcceptedProjectsFromAdmin = async (req, res) => {
     }
 };
 
+
+export const getAcceptedProjectsFromAdmin2 = async (req, res) => {
+    try {
+        // Fetch approved projects that are not marked as deleted
+        const approvedProjects = await Project.find({ status: 'approved', deleted: false });
+
+        // Log the fetched projects for debugging
+        console.log('Fetched projects:', approvedProjects);
+
+        // Respond with the approved projects
+        res.status(200).json({
+            projects: approvedProjects.map(project => ({
+                _id: project._id,
+                title: project.title,
+                description: project.description,
+                studentId: project.studentId,
+                status: project.status,
+                deleted: project.deleted,
+                comments: project.comments,
+                createdAt: project.createdAt,
+                updatedAt: project.updatedAt,
+                __v: project.__v
+            }))
+        });
+    } catch (error) {
+        // Log the error for debugging
+        console.error('Error fetching projects:', error);
+        // Send a generic server error response
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+
+
+
+
+
 //deleteProject from Admin
 export const deleteProjectAdmin = async (req, res) => {
     const { id } = req.params; // Get the project ID from the request parameters

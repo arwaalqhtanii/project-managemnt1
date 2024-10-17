@@ -17,7 +17,9 @@ function Allproject() {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setProjects(response.data); // Assuming response data contains projects
+                setProjects(response.data.projects); // Assuming response data contains projects
+                console.log(response.data.projects);
+                
             } catch (error) {
                 console.error("Error fetching accepted projects:", error);
             }
@@ -33,6 +35,9 @@ function Allproject() {
   const rowsPerPage = 4;
 
   const start = currentPage * rowsPerPage;
+  // if (!Array.isArray(projects)) {
+  //   return <div>Loading...</div>; // or handle the error state
+  // }
   const currentRows = projects.slice(start, start + rowsPerPage);
   const totalPages = Math.ceil(projects.length / rowsPerPage);
 
@@ -52,7 +57,7 @@ function Allproject() {
     <table className="min-w-full bg-white rounded-lg">
       <thead>
         <tr className="bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white">
-          <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Student Name</th>
+          {/* <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Student Name</th> */}
           <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Project Title</th>
           <th className="p-4 text-center border-b-2 border-gray-300 text-lg font-semibold">Project Description</th>
         </tr>
@@ -60,9 +65,9 @@ function Allproject() {
       <tbody>
         {currentRows.map((item, index) => (
           <tr key={index} className="hover:bg-blue-50 transition duration-300">
-            <td className="p-4 text-center border-b border-gray-200 text-gray-800">{item.studentName}</td>
-            <td className="p-4 text-center border-b border-gray-200 text-gray-800">{item.projectTitle}</td>
-            <td className="p-4 text-center border-b border-gray-200 text-gray-800">{item.projectDescription}</td>
+            {/* <td className="p-4 text-center border-b border-gray-200 text-gray-800">{item.Usernamr}</td> */}
+            <td className="p-4 text-center border-b border-gray-200 text-gray-800">{item.title}</td>
+            <td className="p-4 text-center border-b border-gray-200 text-gray-800">{item.description}</td>
           </tr>
         ))}
       </tbody>
