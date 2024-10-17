@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
+import NavbarStudent from '../components/NavbarStudent';
 
 
 function StudentHomePage() {
@@ -35,7 +36,7 @@ useEffect(() => {
   return (
 
     <>
-    <Navbar></Navbar>
+    <NavbarStudent></NavbarStudent>
     <div className="min-h-screen bg-gray-100 font-sans">
 
      

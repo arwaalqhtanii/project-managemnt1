@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Navbar() {
+function NavbarStudent() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -17,9 +17,11 @@ function Navbar() {
 
     
         <div className="hidden md:flex space-x-8 text-lg font-semibold">
-        <a href="/adminhome" className="hover:text-gray-300 transition duration-300">Home</a>
-          <a href="/addstudent" className="hover:text-gray-300 transition duration-300">Students</a>
-          <a href="/admin" className="hover:text-gray-300 transition duration-300">My Students</a>
+        <a href="/studentHome" className="hover:text-gray-300 transition duration-300">Home</a>
+          <a href="/allproject" className="hover:text-gray-300 transition duration-300">All Project</a>
+          <a href="/myproject" className="hover:text-gray-300 transition duration-300">My Project</a>
+          <a href="/addidea" className="hover:text-gray-300 transition duration-300">New Project</a>
+
         </div>
 
     
@@ -46,10 +48,11 @@ function Navbar() {
    
       {isOpen && (
         <div className="md:hidden bg-[#2b39a0] border-t border-gray-700 shadow-lg">
-          <a href="/adminhome" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">Home</a>
-          <a href="/addstudent" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">Students</a>
-          <a href="/admin" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">My Students</a>
-          
+          <a href="/studentHome" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">Home</a>
+          <a href="/allproject" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">All Project</a>
+          <a href="/myproject" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">My Project</a>
+          <a href="/addidea" className="block py-3 px-6 hover:bg-gray-700 transition duration-300">Add Project</a>
+
           <button className="group bg-transparent hover:bg-red-600 text-white block py-3 px-6 rounded-full shadow-md transition duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" className="fill-red-500 group-hover:fill-white transition duration-300">
             <path d="M806-440H320v-80h486l-62-62 56-58 160 160-160 160-56-58 62-62ZM600-600v-160H200v560h400v-160h80v160q0 33-23.5 56.5T600-120H200q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h400q33 0 56.5 23.5T680-760v160h-80Z"/>
@@ -61,4 +64,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarStudent;

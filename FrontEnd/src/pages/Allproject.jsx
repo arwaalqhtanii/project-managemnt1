@@ -3,6 +3,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import axios from 'axios';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import NavbarStudent from '../components/NavbarStudent';
 
 function Allproject() {
   const [projects, setProjects] = useState([]);
@@ -37,7 +38,7 @@ function Allproject() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar/>
+     <NavbarStudent></NavbarStudent>
    
       <div className="flex-grow min-h-screen flex flex-col items-center justify-center p-4 max-sm:p-1">
       <div className="w-full max-w-7xl bg-white shadow-lg rounded-lg p-6 max-sm:p-1 flex flex-col items-center">

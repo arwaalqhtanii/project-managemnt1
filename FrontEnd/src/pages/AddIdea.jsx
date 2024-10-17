@@ -5,6 +5,7 @@ import idea from '../assets/idea.jpg';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
+import NavbarStudent from '../components/NavbarStudent';
 
 function AddIdea() {
   const [title, setProjectName] = useState('');
@@ -52,7 +53,7 @@ function AddIdea() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r">
       {/* Navbar */}
-      <Navbar />
+     <NavbarStudent></NavbarStudent>
 
       {/* Main Content */}
       <div className="flex-grow flex flex-col min-h-screen md:flex-row items-center justify-center p-4">
