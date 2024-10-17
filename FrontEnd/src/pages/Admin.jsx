@@ -20,22 +20,23 @@ function Admin() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
 
+    const fetchAssignedStudents = async () => {
+        try {
+            const response = await axios.get('http://localhost:5040/users/assignedStudents', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('Token')}`,
+                },
+            });
+            setStudentsData(response.data.assignedStudents);
+        } catch (err) {
+            setError('Failed to fetch assigned students');
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
     useEffect(() => {
-        const fetchAssignedStudents = async () => {
-            try {
-                const response = await axios.get('http://localhost:5040/users/assignedStudents', {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem('Token')}`,
-                    },
-                });
-                setStudentsData(response.data.assignedStudents);
-            } catch (err) {
-                setError('Failed to fetch assigned students');
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+     
 
         fetchAssignedStudents();
     }, []);
@@ -78,15 +79,23 @@ function Admin() {
     };
     
     const deleteStudentById = async (id) => {
+        const confirmed = window.confirm('Are you sure you want to delete this student?');
+    
+        if (!confirmed) {
+            return; // If the user clicked "Cancel", exit the function
+        }
+    
+        console.log(id);
+        
         const token = localStorage.getItem('Token'); // If using token authentication
         try {
-            await axios.delete(`http://localhost:5040/students/${id}`, {
+            await axios.delete(`http://localhost:5040/users/students/${id}`, {
                 headers: {
                     Authorization: `Bearer ${token}`, // Include token if needed
                 },
             });
             // Refresh the list after deletion
-            fetchStudents();
+            fetchAssignedStudents();
         } catch (error) {
             console.error('Error deleting student:', error);
             setError('Error deleting student: ' + (error.response?.data?.message || error.message));

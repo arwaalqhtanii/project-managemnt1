@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { CiSearch } from "react-icons/ci";
+import { toast } from 'react-toastify';
 import StudentIdeaItems from '../components/StudentIdeaItems';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
@@ -76,6 +77,8 @@ function StudentIdeas() {
             // Refresh the projects after updating
             await fetchProjects(); // Call the fetchProjects function here
             setIsRejected(status === 'rejected'); // Set rejection state
+            toast.success('Your project update has been submitted successfully!');
+
         } catch (error) {
             console.error('Error updating project status:', error);
         }
@@ -109,11 +112,11 @@ function StudentIdeas() {
                         <div className="mt-4 w-full max-w-md">
                             <h1>{error}</h1>
                             <div className="relative">
-                                <input
+                                {/* <input
                                     type="search"
                                     className="h-12 w-full bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 text-black pl-4 pr-10"
                                     placeholder="Search..."
-                                />
+                                /> */}
                             </div>
                         </div>
                     </header>
