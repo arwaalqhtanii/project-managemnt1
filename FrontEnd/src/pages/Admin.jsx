@@ -144,7 +144,7 @@ function Admin() {
 
                         {/* زر إضافة طالب */}
                         <button
-                            className="hidden md:flex items-center bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white px-2 py-1 rounded-md shadow hover:shadow-md transition duration-300 transform hover:-translate-y-1 focus:outline-none"
+                            className="hidden md:flex items-center bg-gradient-to-r from-[#676ea1] to-[#2B39A0] text-white px-1 py-1 rounded-md shadow hover:shadow-md transition duration-300 transform hover:-translate-y-1 focus:outline-none"
                             onClick={() => navigate('/addstudent')}
                         >
                             <FaPlus className="mr-2 w-4 h-4" /> Add Student
