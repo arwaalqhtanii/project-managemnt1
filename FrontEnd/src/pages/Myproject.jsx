@@ -43,7 +43,7 @@ function Myproject() {
 
   const getStatusClass = (status) => {
     switch (status) {
-      case 'Accepted':
+      case 'approved':
         return 'bg-green-500 text-white';
       case 'Rejected':
         return 'bg-red-500 text-white';
