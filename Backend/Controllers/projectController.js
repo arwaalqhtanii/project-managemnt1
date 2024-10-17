@@ -167,7 +167,7 @@ export const getProjectsForStudent = async (req, res) => {
 
 
 //update project status  and comments from admin
-export const updateProjectStatus = async (req, res) => {
+export const updateProjectStatus = async (req, res) => { 
     const { id } = req.params;
     const { status, comment } = req.body; // Destructure status and comment
 
@@ -193,6 +193,7 @@ export const updateProjectStatus = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
 
 
 //getAcceptedProjectsFromAdmin

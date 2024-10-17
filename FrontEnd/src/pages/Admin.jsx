@@ -76,6 +76,22 @@ function Admin() {
     const clearSearch = () => {
         setSearchTerm('');
     };
+    
+    const deleteStudentById = async (id) => {
+        const token = localStorage.getItem('Token'); // If using token authentication
+        try {
+            await axios.delete(`http://localhost:5040/students/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Include token if needed
+                },
+            });
+            // Refresh the list after deletion
+            fetchStudents();
+        } catch (error) {
+            console.error('Error deleting student:', error);
+            setError('Error deleting student: ' + (error.response?.data?.message || error.message));
+        }
+    };
 
     return (
         <div className="flex flex-col min-h-screen">
@@ -166,8 +182,8 @@ function Admin() {
                                                     </svg>
                                                 </button>
                                                 <button 
-                                                    onClick={DeleteStudentFN} 
-                                                    className="flex items-center text-red-600 hover:text-red-400"
+                                onClick={() => deleteStudentById(student._id)} // Call delete function on click
+                                className="flex items-center text-red-600 hover:text-red-400"
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ff0000">
                                                         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />

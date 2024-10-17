@@ -14,10 +14,11 @@ const port = process.env.PORT;
 
 // Use cors middleware
 app.use(cors({
-    origin: 'http://localhost:5173', // Allow requests from this origin (your frontend)
-    methods: ['GET', 'POST', 'PATCH', 'DELETE'], // Specify allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+    origin: 'http://localhost:5173', // Your frontend origin
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
 }));
+
 
 app.use(express.json());
 
