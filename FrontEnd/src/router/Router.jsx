@@ -6,7 +6,7 @@ import AddIdea from "../pages/AddIdea";
 import StudentRegister from '../pages/StudentRegister';
 import StudentLogin from "../pages/StudentLogin";
 import WelcomePage from "../pages/Welcome";
-// import Admin from "../pages/Admin";
+import Admin from "../pages/Admin";
 import HomeAd from "../pages/HomeAd";
 import StudentHomePage from "../pages/StudentHomePage";
 import StudentIdeas from "../pages/StudentIdeas";
@@ -40,10 +40,10 @@ const router = createBrowserRouter([
         element: <AddIdea />
     },
 
-    // {
-    //     path: "/admin",
-    //     element: <Admin></Admin>
-    // },
+    {
+        path: "/admin",
+        element: <Admin></Admin>
+    },
     {
         path: "/adminhome",
         element: <HomeAd></HomeAd>
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         element: <StudentHomePage></StudentHomePage>
     },
     {
-        path:"/studentideas/:id",
+        path:"/studentideas/:studentId",
         element:<StudentIdeas></StudentIdeas>
     },
     {

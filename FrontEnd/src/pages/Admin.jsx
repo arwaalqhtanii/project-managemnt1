@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight, FaPlus } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 import Addstudent from '../components/Addstudent';
+import axios from 'axios';
+
 
 function Admin() {
     const navigate = useNavigate();
@@ -12,14 +14,38 @@ function Admin() {
     const [currentPage, setCurrentPage] = useState(0);
     const rowsPerPage = 4;
 
-    // Sample student data
-    const studentsData = [
-        { name: "Yousef", email: "yohejazi@gmail.com" },
-        { name: "Khaled", email: "khaled@example.com" },
-        { name: "Ahmad", email: "ahmad@example.com" },
-        { name: "Taraq", email: "taraq@example.com" },
-        { name: "Faisal", email: "faisal@example.com" },
-    ];
+    const [studentsData, setStudentsData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+  
+    useEffect(() => {
+      const fetchAssignedStudents = async () => {
+        try {
+          const response = await axios.get('http://localhost:5040/users/assignedStudents', {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('Token')}`, // Include token if required
+            },
+          });
+          setStudentsData(response.data.assignedStudents); // Set the received students data
+        } catch (err) {
+          setError('Failed to fetch assigned students');
+          console.error(err);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchAssignedStudents();
+    }, []);
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (error) {
+      return <div>{error}</div>;
+    }
+
 
     const start = currentPage * rowsPerPage;
     const currentRows = studentsData.slice(start, start + rowsPerPage);
@@ -34,7 +60,13 @@ function Admin() {
     }
 
     function showIdeasFN(index) {
-        navigate(`/studentideas/${index}`);
+        console.log("hiiii"+index);
+        if (index !== undefined) {
+            navigate(`/studentideas/${index}`);
+        } else {
+            console.error("Index is undefined");
+        }
+        // navigate(`/studentideas/${index}`);
     }
 
     function DeleteStudentFN() {
@@ -97,12 +129,12 @@ function Admin() {
                             <tbody>
                                 {currentRows.map((student, index) => (
                                     <tr key={index} className="hover:bg-blue-50 transition duration-300">
-                                        <td className="p-4 text-center border-b border-gray-200 text-gray-800">{student.name}</td>
+                                        <td className="p-4 text-center border-b border-gray-200 text-gray-800">{student.username}</td>
                                         <td className="p-4 text-center border-b border-gray-200 text-gray-800">{student.email}</td>
                                         <td className="p-4 text-center border-b border-gray-200 text-gray-800">
                                             <div className="flex flex-col md:flex-row justify-center items-center space-x-0 md:space-x-4">
                                                 <button 
-                                                    onClick={() => showIdeasFN(index)} 
+                                                    onClick={() => showIdeasFN(student._id)} 
                                                     className="flex items-center text-[#3a46a1] hover:text-blue-500 mb-2 md:mb-0"
                                                 >
                                                     {/* View Ideas Icon */}

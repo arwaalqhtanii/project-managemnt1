@@ -1,5 +1,5 @@
 import express from 'express';
-import { registerAdmin, registerStudent,getAllStudents,assignStudents,getAllAdmins,deleteAdminsByEmail,deleteStudentById,loginAdmin,loginStudent } from '../Controllers/userController.js';
+import { registerAdmin, registerStudent,getAllStudents,assignStudents,getAssignedStudents,getAllAdmins,deleteAdminsByEmail,deleteStudentById,loginAdmin,loginStudent } from '../Controllers/userController.js';
 import {authenticateToken} from '../Middleware/Auth.js'
 
 const router = express.Router();
@@ -34,6 +34,10 @@ router.delete('/admins', deleteAdminsByEmail);
 
 // Assign students to admin
 router.post('/assign-students', authenticateToken, assignStudents);
+
+//assign
+router.get('/assignedStudents', authenticateToken, getAssignedStudents); // New endpoint
+
 
 
 // ... other routes

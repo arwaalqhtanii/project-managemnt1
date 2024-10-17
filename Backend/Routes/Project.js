@@ -1,5 +1,5 @@
 import express from 'express';
-import { postProject,getProjectsForStudents ,deleteProject,getProjectsForAdmin,updateProjectStatus,getAcceptedProjectsFromAdmin,deleteProjectAdmin,getStudentProjectCounts,getAdminProjectCounts} from '../Controllers/projectController.js';
+import { postProject,getProjectsForStudents ,deleteProject,getProjectsForStudent,getProjectsForAdminStudent,getProjectsForAdmin,updateProjectStatus,getAcceptedProjectsFromAdmin,deleteProjectAdmin,getStudentProjectCounts,getAdminProjectCounts} from '../Controllers/projectController.js';
 import { authenticateToken } from '../Middleware/Auth.js';
 
 const router = express.Router();
@@ -13,6 +13,8 @@ router.get('/projects/accepted', authenticateToken, getAcceptedProjectsFromAdmin
 router.delete('/deleteProjectAdmin/:id', authenticateToken, deleteProjectAdmin);
 router.get('/projects/student/counts', authenticateToken, getStudentProjectCounts);
 router.get('/projects/admin/counts', authenticateToken, getAdminProjectCounts);
+router.get('/projects/admin/students', authenticateToken, getProjectsForAdminStudent);//get project for her students
+router.get('/projects/student/:studentId',authenticateToken, getProjectsForStudent);
 
 
 export default router;

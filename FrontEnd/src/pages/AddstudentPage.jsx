@@ -1,28 +1,87 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { CiSearch } from "react-icons/ci";
 import AddstudentItems from '../components/AddstudentItems';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
+import axios from 'axios';
 
 function AddstudentPage() {
     const navigate = useNavigate();
-    const [searchTerm, setSearchTerm] = useState('');
+    // const [searchTerm, setSearchTerm] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState('');
-
-    // Sample student data
-    const studentsData = [
-        { name: "Yousef", email: "yohejazi@gmail.com" },
-        { name: "Khaled", email: "khaled@example.com" },
-        { name: "Ahmad", email: "ahmad@example.com" },
-    ];
+    const [students, setStudents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+  
+    useEffect(() => {
+      const fetchStudents = async () => {
+        try {
+          const response = await axios.get('http://localhost:5040/users/students');
+          console.log(response.data);
+          
+          setStudents(response.data); // Assuming response.data contains the array of students
+        } catch (err) {
+          setError('Failed to fetch students');
+          console.error(err);
+        } finally {
+          setLoading(false);
+        }
+      };
+  
+      fetchStudents();
+    }, []);
+  
+    if (loading) {
+      return <div>Loading...</div>;
+    }
+  
+    if (error) {
+      return <div>{error}</div>;
+    }
+  
+  
 
     // Function to handle student addition
-    const handleAddStudent = (studentName) => {
-        setModalMessage(`The student ${studentName} has been added successfully.`);
-        setIsModalOpen(true);
+    const handleAddStudent = async (studentId , studentName) => {
+        console.log(studentId);
+        const token =localStorage.getItem('Token');
+        
+        try {
+            const response = await axios.post(
+                'http://localhost:5040/users/assign-students',
+                { studentIds: [studentId] }, // Send studentId in an array
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                    },
+                }
+            );
+
+            if (response.status === 200) {
+                setModalMessage(`The student  ${studentName} has been added successfully.`);
+                // toast.success(`Student added!`);
+            } else {
+                setModalMessage(`Failed to add student. Response status: ${response.status}.`);
+                // toast.error(`Error adding student.`);
+            }
+        } catch (error) {
+            console.error('Error adding student:', error);
+            setModalMessage(`An error occurred while adding the student.`);
+            // toast.error(`Error: ${error.response ? error.response.data.message : 'Network error'}`);
+        } finally {
+            setIsModalOpen(true); // Open the modal regardless of success or failure
+        }
+    
     };
+
+    // const handleAddStudent = (studentName) => {
+    //     setModalMessage(`The student ${studentName} has been added successfully.`);
+    //     setIsModalOpen(true);
+
+
+    // };
 
     // Function to close modal
     const closeModal = () => {
@@ -43,13 +102,13 @@ function AddstudentPage() {
                             <div className='h-[35px] w-[fit-content] px-[15px] flex justify-center bg-gray-200 rounded-l-[10px] items-center border-r-[1px] border-gray-400'>
                                 <CiSearch />
                             </div>
-                            <input
+                            {/* <input
                                 type='search'
                                 className='h-[35px] w-80 bg-gray-200 rounded-r-[10px] focus:outline-none px-2'
                                 placeholder="Search by name"
                                 value={searchTerm}
                                 onChange={(e) => setSearchTerm(e.target.value)}
-                            />
+                            /> */}
                         </div>
                         {/* This button will be hidden on small screens */}
                         <button
@@ -79,12 +138,12 @@ function AddstudentPage() {
                             <p className='w-[50px]'></p>
                         </div>
                         {/* بيانات الطلاب */}
-                        {studentsData.map((student, index) => (
+                        {students.map((student, index) => (
                             <AddstudentItems
                                 key={index}
-                                name={student.name}
+                                name={student.username}
                                 studentEmail={student.email}
-                                addstudentFN={() => handleAddStudent(student.name)} // Call the handler function here
+                                addstudentFN={() => handleAddStudent(student._id,student.username)} // Call the handler function here
                             />
                         ))}
                     </div>

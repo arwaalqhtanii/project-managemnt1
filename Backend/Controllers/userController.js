@@ -251,3 +251,20 @@ export const assignStudents = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+// Fetch associated students for an admin
+export const getAssignedStudents = async (req, res) => {
+    try {
+        const admin = await User.findById(req.user.id).populate('assignedStudents'); // Populate the assigned students
+        
+        if (!admin || admin.userType !== 'admin') {
+            return res.status(403).json({ message: 'Only admins can view assigned students' });
+        }
+
+        // Return the populated student data
+        res.status(200).json({ assignedStudents: admin.assignedStudents });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+};
